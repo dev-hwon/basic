@@ -5,6 +5,16 @@ import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import momentPlugin from "@fullcalendar/moment";
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
+import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import { headerSetting, buttonTexts } from "./FullcalendarSetting";
+import testdata from "../db/testWorkData";
+
+console.log(testdata);
 // useQuery, useMutation
 const data = [
   { name: "Group A", value: 400 },
@@ -40,18 +50,22 @@ const renderCustomizedLabel = ({
   );
 };
 
-const marks = [
-  "2023-02-03",
-  "2023-02-07",
-  "2023-02-12",
-  "2023-02-13",
-  "2023-02-22",
-  "2023-02-26",
-];
 const defaultDates = [
   new Date(2023, 2, 3),
   new Date(2023, 2, 5),
   new Date(2023, 2, 13),
+];
+
+const handleDateClick = (arg) => {
+  // bind with an arrow function
+  console.log(arg.dateStr);
+};
+const dayWork = [
+  { title: "event 1", date: "2023-02-13" },
+  { title: "event 2", date: "2023-02-14" },
+  { title: "event 3", date: "2023-02-18" },
+  { title: "event 4", date: "2023-02-19" },
+  { title: "event 5", date: "2023-02-22" },
 ];
 
 export default function Main() {
@@ -138,14 +152,19 @@ export default function Main() {
 
               tileClassName={({ date, view }) => {
                 if (
-                  marks.find((x) => x === moment(date).format("YYYY-MM-DD"))
+                  dayWork.find(
+                    (x) => x.date === moment(date).format("YYYY-MM-DD")
+                  )
                 ) {
-                  console.log({});
                   return "highlight";
                 }
               }}
               tileContent={({ date, view }) => {
-                if (marks.find((x) => x === moment(date).format("YYYY-MM-DD")))
+                if (
+                  dayWork.find(
+                    (x) => x.date === moment(date).format("YYYY-MM-DD")
+                  )
+                )
                   return (
                     <>
                       <div className="flex justify-center items-center absoluteDiv">
@@ -161,11 +180,43 @@ export default function Main() {
             <span className="bold">Selected Date: {sDate}</span>
           </p>
         </div>
+        <div className="col col_12">
+          <FullCalendar
+            plugins={[
+              dayGridPlugin,
+              momentPlugin,
+              interactionPlugin,
+              timeGridPlugin,
+              listPlugin,
+            ]}
+            headerToolbar={headerSetting}
+            // titleFormat={"YYYY-MM-DD"}
+            titleFormat={"YYYY.M.D"}
+            buttonText={buttonTexts}
+            initialView="dayGridMonth"
+            events={dayWork}
+            dateClick={(date) => handleDateClick(date)}
+            eventContent={(e) => renderEventContent(e)}
+            editable={true}
+            /* you can update a remote database when these fire:
+            eventAdd={function(){}}
+            eventChange={function(){}}
+            eventRemove={function(){}}
+            */
+          />
+        </div>
       </div>
     </div>
   );
 }
-
+function renderEventContent(eventInfo) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  );
+}
 function Dotted() {
   return (
     <div
