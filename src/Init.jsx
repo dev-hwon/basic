@@ -10,34 +10,62 @@ import Main from "./pages/Main";
 import { useState, useEffect, useContext } from "react";
 import EmptyPage from "./pages/EmptyPage";
 import Leftsheet from "./components/Leftsheet";
+import Rightsheet from "./components/Rightsheet";
 import Board from "./pages/Board";
-import ColorThemeProvider, { ColorThemeContext } from "./context/ColorTheme";
-import Tabtest2 from "./pages/Tabtest2";
+import ColorThemeProvider, { useColorTheme } from "./context/ColorTheme";
+import Tabtest3 from "./pages/Tabtest3";
+import Header from "./components/Header";
+import Testgrid from "./pages/Testgrid";
+// import PageController from "./components/PageController";
 
 function Init() {
+  const [leftsheetActive, setLeftsheetActive] = useState(false);
+  const [rightsheetActive, setRightsheetActive] = useState(false);
+  const handleClickLeftsheet = () => {
+    setLeftsheetActive(!leftsheetActive);
+  };
+  const handleClickRightsheet = () => {
+    setRightsheetActive(!rightsheetActive);
+  };
   return (
     <ColorThemeProvider>
-      <BrowserRouter>
-        <Testdiv></Testdiv>
-        <Leftsheet></Leftsheet>
-        <Routes>
-          <Route path="/" element={<Main></Main>} />
-          <Route path="/board/:name" element={<Board></Board>} />
-          <Route path="*" element={<EmptyPage />} />
-        </Routes>
-      </BrowserRouter>
+      <Header></Header>
+      <div className="global_wrap default_theme">
+        <BrowserRouter>
+          <button onClick={handleClickLeftsheet}>
+            leftsheet_active_button
+          </button>
+          <button onClick={handleClickRightsheet}>
+            rightsheet_active_button
+          </button>
+          <Leftsheet
+            active={leftsheetActive}
+            onoff={setLeftsheetActive}
+          ></Leftsheet>
+          <Rightsheet
+            active={rightsheetActive}
+            onoff={setRightsheetActive}
+          ></Rightsheet>
+
+          <div
+            className={
+              "global_container" + (leftsheetActive ? " isLeftSheet" : "")
+            }
+          >
+            <div className="container">
+              <Routes>
+                <Route path="/" element={<Testgrid></Testgrid>} />
+                {/* <Route path="/" element={<Main></Main>} /> */}
+                <Route path="/tabtest" element={<Tabtest3></Tabtest3>} />
+                <Route path="/board/:name" element={<Board></Board>} />
+                <Route path="*" element={<EmptyPage />} />
+              </Routes>
+            </div>
+          </div>
+        </BrowserRouter>
+      </div>
     </ColorThemeProvider>
   );
 }
 
 export default Init;
-
-function Testdiv() {
-  const { colortheme, toggleColorTheme } = useContext(ColorThemeContext);
-  return (
-    <div>
-      colorTheme : <span>{colortheme}</span>
-      <button onClick={() => toggleColorTheme()}> toggle</button>
-    </div>
-  );
-}

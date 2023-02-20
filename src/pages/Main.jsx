@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import Moment from "react-moment";
 import moment from "moment";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import momentPlugin from "@fullcalendar/moment";
@@ -12,10 +13,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import { headerSetting, buttonTexts } from "./FullcalendarSetting";
-import testdata from "../db/testWorkData";
+// import testdata from "../db/testWorkData";
+import Tabtest3 from "./Tabtest3";
+import { current, cerrentDate, currenttime } from "./Current";
 
-console.log(testdata);
-// useQuery, useMutation
 const data = [
   { name: "Group A", value: 400 },
   { name: "Group B", value: 300 },
@@ -50,14 +51,7 @@ const renderCustomizedLabel = ({
   );
 };
 
-const defaultDates = [
-  new Date(2023, 2, 3),
-  new Date(2023, 2, 5),
-  new Date(2023, 2, 13),
-];
-
 const handleDateClick = (arg) => {
-  // bind with an arrow function
   console.log(arg.dateStr);
 };
 const dayWork = [
@@ -68,6 +62,12 @@ const dayWork = [
   { title: "event 5", date: "2023-02-22" },
 ];
 
+// const current = new Date();
+// const cerrentDate = moment(current).format("DD MM YYYY");
+// const currenttime = moment(current).format("hh:mm:ss");
+
+// console.log(moment(new Date()).format("YYYY년 MM월 DD일  HH시mm분ss초"));
+
 export default function Main() {
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
@@ -76,12 +76,20 @@ export default function Main() {
     },
     [setActiveIndex]
   );
-  const today = new Date();
-  const [sDate, setSDate] = useState(moment(today).format("YYYY-MM-DD"));
+
+  const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
 
   return (
-    <div>
+    <>
       <div className="col_wrap">
+        <div className="col col_12 mb20">
+          <Moment interval={1000}>1976-04-19T12:59-0500</Moment>
+          <br />
+          <Moment interval={10000} format="hh:mm:ss" date={current}></Moment>
+        </div>
+        <div className="col col_12">
+          <Tabtest3></Tabtest3>
+        </div>
         <div className="col col_6">
           <div style={{ background: "#999" }}>
             <PieChart width={200} height={200}>
@@ -206,7 +214,7 @@ export default function Main() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 function renderEventContent(eventInfo) {
