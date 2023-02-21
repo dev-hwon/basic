@@ -15,10 +15,10 @@ export default function Leftsheet({ active, onoff }) {
         <nav>
           <ul>
             <li>
-              <Link to="/">메인</Link>
+              <Link to={process.env.REACT_APP_HOST}>메인</Link>
             </li>
             <li>
-              <Link to="/tabtest">메뉴1</Link>
+              <Link to={process.env.REACT_APP_HOST + "/tabtest"}>메뉴1</Link>
             </li>
             <li>
               <Link to="/tabtest">메뉴2</Link>

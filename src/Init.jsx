@@ -54,10 +54,10 @@ function Init() {
           >
             <div className="container">
               <Routes>
-                <Route path="/" element={<Testgrid></Testgrid>} />
+                <Route path={"/basic/"} element={<Testgrid></Testgrid>} />
                 {/* <Route path="/" element={<Main></Main>} /> */}
-                <Route path="/tabtest" element={<Tabtest3></Tabtest3>} />
-                <Route path="/board/:name" element={<Board></Board>} />
+                <Route path="/basic/tabtest" element={<Tabtest3></Tabtest3>} />
+                <Route path="/basic/board/:name" element={<Board></Board>} />
                 <Route path="*" element={<EmptyPage />} />
               </Routes>
             </div>
