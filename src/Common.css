@@ -188,12 +188,14 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 /* ----------------------------------------------------------------
                        container
 -----------------------------------------------------------------*/
-.container { position:relative; margin: 0 auto;}
+.container { position:relative; width:100%; margin: 0 auto; max-width: 1170px;}
+/* 반응형 제거
 @media (max-width:767px){.container {width:100%}}
 @media (min-width:768px){.container{width:750px}}
 @media (min-width:992px){.container{width:970px}}
 @media (min-width:1200px){.container{width:1170px}}
-@media (min-width:1400px){.container {width:1280px}}
+@media (min-width:1400px){.container {width:1280px}} 
+*/
 
 /* ---------------------------------------------------------
         @공통_그리드
@@ -485,29 +487,32 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 /* ----------------------------------------------------------------
         글로벌레이아웃
 -----------------------------------------------------------------*/
-.global_wrap {display:flex; flex-wrap:wrap; width:100%; background-color: var(--theme-bg2);color: var(--theme-fontcolor); --global-left-width: 250px; --global-right-width: 250px; }
+.global_wrap {display:flex; flex-wrap:wrap; width:100%; background-color: var(--theme-bg2); color: var(--theme-fontcolor); --global-left-width: 250px; --global-right-width: 250px; }
 .global_wrap > div { flex:0 0 auto; } 
-.global_wrap .global_left { position: fixed; top: 0; left: 0;  width: var(--global-left-width); min-height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transform: translateX(calc(var(--global-left-width) * -1)); ;transition: all .4s; z-index: 100; }
+.global_wrap .global_left { position: fixed; top: 0; left: 0; width: var(--global-left-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transform: translateX(calc(var(--global-left-width) * -1)); ;transition: width .4s, transform .4s; z-index: 100; padding:20px; overflow-y: auto; overflow-x: hidden;}
 .global_wrap .global_left.active {transform: translateX(0);}
 
-.global_wrap .global_right { position: fixed; top: 0; right: 0; padding:15px; width:var(--global-right-width); background-color: #ccc; z-index: 100;}
+.global_wrap .global_right { position: fixed; top: 0; right: 0; height: 100%; padding:15px; width:var(--global-right-width); background-color: #ccc; transform: translateX(var(--global-left-width)); transition: width .4s, transform .4s; z-index: 100; overflow: auto;}
+.global_wrap .global_right.active {transform: translateX(0);}
 
 .global_wrap .global_container { width: 100%; min-height:100vh; padding-left: 0; transition: all .36s;}
 .global_wrap .global_container.isLeftSheet { padding-left:var(--global-left-width); }
+.global_wrap .global_container.isRightSheet { padding-right:var(--global-right-width); }
 
 @media (max-width:767px) {
-    .global_wrap {--global-left-width: 80vw;}
+    .global_wrap {--global-left-width: 80vw; --global-right-width: 80vw;}
     .global_wrap .global_container.isLeftSheet { padding-left: 0; }
+    .global_wrap .global_container.isRightSheet { padding-right: 0; }
 }
 
 
 /* ----------------------------------------------------------------
                        스크롤바
 -----------------------------------------------------------------*/
-::-webkit-scrollbar { width: 8px; height:8px;}
-::-webkit-scrollbar-track { background-color: #e1e1e1; -webkit-border-radius: 2px;border-radius: 2px;}
-::-webkit-scrollbar-thumb { /* background: var(--theme-anchor); */ background: #0d6efd; -webkit-border-radius: 2px;border-radius: 2px;}
-::-webkit-scrollbar-button { display: block; height:8px;}
+::-webkit-scrollbar { width: 6px; height:6px;}
+::-webkit-scrollbar-track { background-color: #e1e1e1; -webkit-border-radius: 2px; border-radius: 2px;}
+::-webkit-scrollbar-thumb { /* background: var(--theme-anchor); */ background: #555555; -webkit-border-radius: 2px;border-radius: 2px;}
+::-webkit-scrollbar-button { display: none; height:6px;}
 
 
 
@@ -529,4 +534,7 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 
 
   .container {padding:0 20px; margin:0;}
-  .testBox {width:100%; height:200px; background-color: #777;}
+  .testBox {width:100%; height:300px; background-color: #777;}
+
+  .nav_menu { padding:20px; }
+  .nav_menu ul li { margin-bottom:20px; }

@@ -1,11 +1,10 @@
 //eslint-disable
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import { useColorTheme } from "../context/ColorTheme";
 
-export default function Rightsheet() {
+export default function Rightsheet({ active, onoff }) {
   return (
-    <div className="global_right">
+    <div className={"global_right" + (active ? " active" : "")}>
       <div className="col_wrap col_gap_16">
         <div className="col col_12">
           <div className="testBox"></div>
