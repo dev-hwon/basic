@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 export default function Tabtest3() {
   const [tabStatus, setTabStatus] = useState(0);
-
   useEffect(() => {
     setTabStatus(0);
     return () => {
@@ -23,11 +22,10 @@ export default function Tabtest3() {
           <button onClick={() => setTabStatus(2)}>tab3</button>
         </li>
       </ul>
-      <div>{tabStatus}</div>
       <div className="tabContent">
-        <div className={tabStatus === 0 ? "active" : "x"}>tab1_content</div>
-        <div className={tabStatus === 1 ? "active" : "x"}>tab2_content</div>
-        <div className={tabStatus === 2 ? "active" : "x"}>tab3_content</div>
+        <div className={tabStatus === 0 ? "active" : ""}>tab1_content</div>
+        <div className={tabStatus === 1 ? "active" : ""}>tab2_content</div>
+        <div className={tabStatus === 2 ? "active" : ""}>tab3_content</div>
       </div>
     </div>
   );

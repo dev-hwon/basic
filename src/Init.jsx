@@ -29,15 +29,8 @@ function Init() {
   };
   return (
     <ColorThemeProvider>
-      <Header></Header>
       <div className="global_wrap default_theme">
         <BrowserRouter>
-          <button onClick={handleClickLeftsheet}>
-            leftsheet_active_button
-          </button>
-          <button onClick={handleClickRightsheet}>
-            rightsheet_active_button
-          </button>
           <Leftsheet
             active={leftsheetActive}
             onoff={setLeftsheetActive}
@@ -53,6 +46,13 @@ function Init() {
             }
           >
             <div className="container">
+              <button onClick={handleClickLeftsheet}>
+                leftsheet_active_button
+              </button>
+              <button onClick={handleClickRightsheet}>
+                rightsheet_active_button
+              </button>
+              <Header></Header>
               <Routes>
                 <Route path={"/basic/"} element={<Testgrid></Testgrid>} />
                 {/* <Route path="/" element={<Main></Main>} /> */}

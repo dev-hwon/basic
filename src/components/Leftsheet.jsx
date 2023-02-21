@@ -1,11 +1,13 @@
 //eslint-disable
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
+const url = `${process.env.REACT_APP_HOST_MAIN}`;
 
 export default function Leftsheet({ active, onoff }) {
   const handleClick = () => {
     onoff(false);
   };
+
   return (
     <>
       <div className={"global_left" + (active ? " active" : "")}>
@@ -15,19 +17,19 @@ export default function Leftsheet({ active, onoff }) {
         <nav>
           <ul>
             <li>
-              <Link to={process.env.REACT_APP_HOST}>메인</Link>
+              <Link to={url}>메인</Link>
             </li>
             <li>
-              <Link to={process.env.REACT_APP_HOST + "/tabtest"}>메뉴1</Link>
+              <Link to={url + "/tabtest"}>메뉴1</Link>
             </li>
             <li>
-              <Link to="/tabtest">메뉴2</Link>
+              <Link to={url + "/tabtest"}>메뉴2</Link>
             </li>
             <li>
-              <Link to="/tabtest">메뉴3</Link>
+              <Link to={url + "/tabtest"}>메뉴3</Link>
             </li>
             <li>
-              <Link to="/tabtest">메뉴4</Link>
+              <Link to={url + "/tabtest"}>메뉴4</Link>
             </li>
           </ul>
         </nav>
