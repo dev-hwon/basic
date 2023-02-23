@@ -17,12 +17,6 @@ import TodoCharts from "../../components/dashboard/TodoCharts";
 import CalendarSmall from "../../components/dashboard/CalendarSmall";
 import CalendarTimeline from "../../components/dashboard/CalendarTimeline";
 
-// const current = new Date();
-// const cerrentDate = moment(current).format("DD MM YYYY");
-// const currenttime = moment(current).format("hh:mm:ss");
-
-// console.log(moment(new Date()).format("YYYY년 MM월 DD일  HH시mm분ss초"));
-
 export default function Main() {
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
 

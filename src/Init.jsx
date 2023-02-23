@@ -1,5 +1,5 @@
 import "./Common.css";
-import Login from "./pages/Login";
+import Login from "./pages/member/Login";
 import { useState } from "react";
 import Index from "./pages/Index";
 

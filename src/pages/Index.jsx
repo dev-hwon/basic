@@ -56,8 +56,12 @@ export default function Index() {
               <Header></Header>
               <Routes>
                 <Route path="/" element={<Main></Main>} />
-                <Route path="/basic/" element={<Testgrid></Testgrid>} />
-                <Route path="/basic/main" element={<Main></Main>} />
+                <Route
+                  path="/layout/testgrid"
+                  element={<Testgrid></Testgrid>}
+                />
+                <Route path="/layout/main" element={<Main></Main>} />
+                <Route path="/basic" element={<Main></Main>} />
                 <Route path="/basic/tabtest" element={<Tabtest3></Tabtest3>} />
                 <Route path="/basic/board/:name" element={<BoardList />} />
                 <Route path="*" element={<EmptyPage />} />
