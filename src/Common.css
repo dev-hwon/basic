@@ -76,7 +76,7 @@ img {
     clear:both;
     *zoom:1;
 }
-button {cursor:pointer; }
+button { cursor:pointer; }
 /* a Css */
 a{cursor:pointer; color:var(--theme-anchor); text-decoration:none }
 /*
@@ -211,7 +211,7 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 .col_gap_8 {margin:0 -4px;}
 .col_gap_8 > .col {padding:0 4px;}
 .col_gap_14 {margin:0 -7px;}
-.col_gap_14 > .col {padding:0 7px;}
+.col_gap_14 > .col { padding:0 7px; margin-bottom: 14px; }
 .col_gap_16 {margin:0 -8px;}
 .col_gap_16 > .col {padding:0 8px; margin-bottom:16px;}
 
@@ -233,13 +233,13 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 /* ----------------------------------------------------------------
                        정렬
 -----------------------------------------------------------------*/
-.text-left {
+.text_left {
     text-align: left!important;
 }
-.text-right {
+.text_right {
     text-align: right!important;
 }
-.text-center {
+.text_center {
     text-align: center!important;
 }
 .full-left {
@@ -497,23 +497,23 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
 /* ----------------------------------------------------------------
         글로벌레이아웃
 -----------------------------------------------------------------*/
-.global_wrap {display:flex; flex-wrap:wrap; width:100%; background-color: var(--theme-bg2); color: var(--theme-fontcolor); --global-left-width: 250px; --global-right-width: 250px; }
+.global_wrap { --global-lnb-width: 250px; --postIt-width: 250px; display:flex; flex-wrap:wrap; width:100%; background-color: var(--theme-bg2); color: var(--theme-fontcolor);  }
 .global_wrap > div { flex:0 0 auto; } 
-.global_wrap .global_left { position: fixed; top: 0; left: 0; width: var(--global-left-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transform: translateX(calc(var(--global-left-width) * -1)); ;transition: width .4s, transform .4s; z-index: 100; padding:20px; overflow-y: auto; overflow-x: hidden;}
-.global_wrap .global_left.active {transform: translateX(0);}
+.global_wrap .global_lnb { position: fixed; top: 0; left: 0; width: var(--global-lnb-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transition: width .4s; z-index: 100; padding:10px; overflow-y: auto; overflow-x: hidden;}
+.global_wrap .global_lnb.fold { width: 60px; }
 
-.global_wrap .global_right { position: fixed; top: 0; right: 0; height: 100%; padding:15px; width:var(--global-right-width); background-color: #ccc; transform: translateX(var(--global-left-width)); transition: width .4s, transform .4s; z-index: 100; overflow: auto;}
-.global_wrap .global_right.active {transform: translateX(0);}
+.global_wrap .layer_postIt { position: fixed; top: 0; right: 0; height: 100%; padding:15px; width:var(--postIt-width); background-color: #ccc; transform: translateX(var(--postIt-width)); transition: width .4s, transform .4s; z-index: 100; overflow: auto;}
+.global_wrap .layer_postIt.active {transform: translateX(0);}
 
-.global_wrap .global_container { width: 100%; min-height:100vh; padding-left: 0; transition: all .36s;}
-.global_wrap .global_container.isLeftSheet { padding-left:var(--global-left-width); }
-.global_wrap .global_container.isRightSheet { padding-right:var(--global-right-width); }
+.global_wrap .global_container { width: 100%; min-height:100vh; padding-left: var(--global-lnb-width); transition: all .4s;}
+.global_wrap .global_container.lnb_fold { padding-left: 60px; }
 
-@media (max-width:767px) {
+
+
+/* @media (max-width:767px) {
     .global_wrap {--global-left-width: 80vw; --global-right-width: 80vw;}
     .global_wrap .global_container.isLeftSheet { padding-left: 0; }
-    .global_wrap .global_container.isRightSheet { padding-right: 0; }
-}
+} */
 
 
 /* ----------------------------------------------------------------
@@ -525,18 +525,24 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
 ::-webkit-scrollbar-button { display: none; height:6px;}
 
 
-
+/* ----------------------------------------------------------------
+                       테스트용 css
+-----------------------------------------------------------------*/
+.col > div { background-color: #f9f9f9; height:100%; min-height: 50px;}
+header, footer { position:relative; width:100%; background-color: #ccc; display: flex; height:60px; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;} 
+button {outline: none; box-shadow: none!important; border:1px solid #333; border-radius: 2px; font-size: 12px; padding:0 4px; min-height: 20px;}
+button.active { background-color: #0d6efd; border-color:#0d6efd; color:#fff;} 
 
 .highlight {
 background: #f3a95f!important;
 }
 .react-calendar__month-view__days__day--neighboringMonth {
-color:#ccc!important;
+    color:#ccc!important;
 }
 .dot { display: block; width: 10px; height: 10px; border-radius: 50%; background-color: #f3a95f;}
 
 .wednesday {
-background: #ff9900!important;
+    background: #ff9900!important;
 }
 
 .tabContent > div {display: none; font-size: 20px; padding:20px;}
@@ -548,3 +554,5 @@ background: #ff9900!important;
 
 .nav_menu { padding:20px; }
 .nav_menu ul li { margin-bottom:20px; }
+
+.btn_lnb_controll { width:40px; height:40px; border:none; background-color: #000;  }

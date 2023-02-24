@@ -2,9 +2,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
-export default function Rightsheet({ active, onoff }) {
+export default function PostIt({ active }) {
   return (
-    <div className={"global_right" + (active ? " active" : "")}>
+    <div className={"layer_postIt" + (active ? " active" : "")}>
       <div className="col_wrap col_gap_16">
         <div className="col col_12">
           <div className="testBox"></div>
