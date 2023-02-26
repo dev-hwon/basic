@@ -9,6 +9,7 @@ import Tabtest3 from "./pages/test/Tabtest3";
 import BoardList from "./pages/board/BoardList";
 import EmptyPage from "./pages/EmptyPage";
 import BoardIndex from "./pages/board/BoardIndex";
+import SettingIndex from "./pages/setting/SettingIndex";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/layout/testgrid", element: <Testgrid /> },
       { path: "/basic", element: <Main /> },
       { path: "/tabtest", element: <Tabtest3 /> },
+      { path: "/setting", element: <SettingIndex /> },
       { path: "/board", element: <BoardIndex /> },
       { path: "/board/:boardNname", element: <BoardList /> },
       { path: "/tabtest", element: <BoardList /> },

@@ -34,6 +34,8 @@ export default function CalendarSmall({ setSDate }) {
         navigationAriaLabel="go up"
         minDetail="decade"
         maxDetail="month"
+        prev2Label={null}
+        next2Label={null}
         showNavigation={true} // 상단날짜네비게이션
         showNeighboringMonth={true} // 이전,이후달의 날짜 노출여부
         // onClickDay={(date) =>

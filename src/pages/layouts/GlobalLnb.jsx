@@ -30,7 +30,7 @@ export default function GlobalLnb({ fold, onoff }) {
               <Link to={"/login"}>로그인</Link>
             </li>
             <li>
-              <Link to={"/tabtest"}>메뉴4</Link>
+              <Link to={"/setting"}>setting</Link>
             </li>
           </ul>
         </nav>

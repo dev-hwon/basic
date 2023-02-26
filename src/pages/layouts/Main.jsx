@@ -21,13 +21,14 @@ export default function Main() {
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
+      <h2>클리닉리포트</h2>
       <div className="col_wrap col_gap_14">
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div>
             <TodoCharts></TodoCharts>
           </div>
         </div>
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_auto">
           <div>
             <TodosHeader
               filters={filters}
@@ -37,30 +38,32 @@ export default function Main() {
             <TodoList filter={filter} />
           </div>
         </div>
-        <div className="col col_md_6 col_lg_3">
-          <div></div>
+        <div className="col col_custom">
+          <div>핳하ㅏㅎ</div>
         </div>
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div>
             <CalendarSmall setSDate={setSDate}></CalendarSmall>
             <div className="text_center bold">Selected Date: {sDate}</div>
           </div>
         </div>
       </div>
+      <h2>오늘 해야 할 일</h2>
       <div className="col_wrap col_gap_14">
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div></div>
         </div>
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div></div>
         </div>
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div></div>
         </div>
-        <div className="col col_md_6 col_lg_3">
+        <div className="col col_custom">
           <div></div>
         </div>
       </div>
+      <h2>해야 할 일 목록</h2>
       <div className="col_wrap col_gap_14">
         <div className="col col_12 mb20">
           <div></div>
