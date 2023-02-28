@@ -12,10 +12,10 @@ export default function Index() {
   const [postItActive, setPostItActive] = useState(false);
   return (
     <ColorThemeProvider>
-      <div className="global_wrap default_theme">
+      <div className={"global_wrap" + (lnbFold ? " lnb_fold" : "")}>
         <GlobalLnb fold={lnbFold} onoff={setLnbFold}></GlobalLnb>
         <PostIt isActive={postItActive}></PostIt>
-        <div className={"global_container" + (lnbFold ? " lnb_fold" : "")}>
+        <div className="global_container">
           <Header
             isActive={postItActive}
             postItActive={setPostItActive}

@@ -27,11 +27,11 @@ export default function ColorThemeProvider({ children }) {
 
 function updateColorTheme(colortheme) {
   if (colortheme !== "default") {
-    document.documentElement.classList.add("theme_dark");
-    localStorage.theme = "dark";
-  } else {
     document.documentElement.classList.remove("theme_dark");
     localStorage.theme = "default";
+  } else {
+    document.documentElement.classList.add("theme_dark");
+    localStorage.theme = "dark";
   }
 }
 export const useColorTheme = () => useContext(ColorThemeContext);

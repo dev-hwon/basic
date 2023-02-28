@@ -1,20 +1,23 @@
 //eslint-disable
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import { useColorTheme } from "../../context/ColorTheme";
+// import { useColorTheme } from "../../context/ColorTheme";
 const url = `${process.env.REACT_APP_HOST}`;
 
 export default function GlobalLnb({ fold, onoff }) {
-  const { colortheme, toggleColorTheme } = useColorTheme("default");
+  // const { colortheme, toggleColorTheme } = useColorTheme();
   const handleClick = () => {
     onoff((prev) => !prev);
   };
 
   return (
     <>
-      <div className={"global_lnb" + (fold ? " fold" : "")}>
-        <button className="btn_lnb_controll" onClick={handleClick}></button>
-        <button onClick={toggleColorTheme}>color theme : {colortheme}</button>
+      <div className="global_lnb">
+        {/* <button onClick={toggleColorTheme}>color theme : {colortheme}</button> */}
+        <button
+          className={"btn_lnb_controll" + (fold ? " fold" : "")}
+          onClick={handleClick}
+        ></button>
         <nav className="nav_menu nav_menu1">
           <ul>
             <li>

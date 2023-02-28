@@ -8,11 +8,13 @@ import {
   currenttime,
   dayWork,
 } from "../../components/Current";
-import TodoCharts from "../../components/dashboard/TodoCharts";
 import CalendarSmall from "../../components/dashboard/CalendarSmall";
 // import CalendarTimeline from "../../components/dashboard/CalendarTimeline";
 import TodoList from "../todos/TodoList";
 import TodosHeader from "../../components/todos/TodosHeader";
+import TodoAchievementChart from "../../components/todos/TodoAchievementChart";
+import { Box, BoxCont, GridTitle, GridCol, GridWrap, BoxHead } from "./Layout";
+import Reviews from "../reviews/Reviews";
 
 const filters = ["all", "active", "completed"];
 export default function Main() {
@@ -21,62 +23,98 @@ export default function Main() {
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
-      <h2>클리닉리포트</h2>
-      <div className="col_wrap col_gap_14">
-        <div className="col col_custom">
-          <div>
-            <TodoCharts></TodoCharts>
-          </div>
-        </div>
-        <div className="col col_auto">
-          <div>
+      <GridTitle>제목1</GridTitle>
+      <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
+        <GridCol>
+          <Box>
+            <BoxHead>오늘의 업무 완료</BoxHead>
+            <TodoAchievementChart
+              percent={75}
+              trackLength={0.6}
+              chartDirection={0.625}
+            />
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <BoxHead>리뷰 한번에 보기</BoxHead>
+            <Reviews></Reviews>
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <BoxHead>지역 리뷰 비교</BoxHead>
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <CalendarSmall setSDate={setSDate}></CalendarSmall>
+            {/* <div className="text_center bold">Selected Date: {sDate}</div> */}
+          </Box>
+        </GridCol>
+      </GridWrap>
+
+      <GridTitle className="mt20">투두리스트1</GridTitle>
+      <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
+        <GridCol>
+          <Box>
             <TodosHeader
               filters={filters}
               filter={filter}
               onFilterChange={setFilter}
             />
             <TodoList filter={filter} />
-          </div>
-        </div>
-        <div className="col col_custom">
-          <div>핳하ㅏㅎ</div>
-        </div>
-        <div className="col col_custom">
-          <div>
-            <CalendarSmall setSDate={setSDate}></CalendarSmall>
-            <div className="text_center bold">Selected Date: {sDate}</div>
-          </div>
-        </div>
-      </div>
-      <h2>오늘 해야 할 일</h2>
-      <div className="col_wrap col_gap_14">
-        <div className="col col_custom">
-          <div></div>
-        </div>
-        <div className="col col_custom">
-          <div></div>
-        </div>
-        <div className="col col_custom">
-          <div></div>
-        </div>
-        <div className="col col_custom">
-          <div></div>
-        </div>
-      </div>
-      <h2>해야 할 일 목록</h2>
-      <div className="col_wrap col_gap_14">
-        <div className="col col_12 mb20">
-          <div></div>
-        </div>
-        <div className="col col_12 mb20">
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <TodosHeader
+              filters={filters}
+              filter={filter}
+              onFilterChange={setFilter}
+            />
+            <TodoList filter={filter} />
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <TodosHeader
+              filters={filters}
+              filter={filter}
+              onFilterChange={setFilter}
+            />
+            <TodoList filter={filter} />
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box>
+            <TodosHeader
+              filters={filters}
+              filter={filter}
+              onFilterChange={setFilter}
+            />
+            <TodoList filter={filter} />
+          </Box>
+        </GridCol>
+      </GridWrap>
+
+      <GridTitle className="mt20">투두리스트2</GridTitle>
+      <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
+        <GridCol>
           <Moment interval={1000}>1976-04-19T12:59-0500</Moment>
           <br />
           <Moment interval={10000} format="hh:mm:ss" date={current}></Moment>
-        </div>
-        <div className="col col_12">
-          {/* <CalendarTimeline></CalendarTimeline> */}
-        </div>
-      </div>
+        </GridCol>
+        <GridCol>
+          <Box>2</Box>
+        </GridCol>
+        <GridCol>
+          <Box>3</Box>
+        </GridCol>
+        <GridCol>
+          <Box>4</Box>
+        </GridCol>
+      </GridWrap>
     </>
   );
 }
