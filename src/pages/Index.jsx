@@ -4,7 +4,7 @@ import ColorThemeProvider, { useColorTheme } from "../context/ColorTheme";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import GlobalLnb from "./layouts/GlobalLnb";
-import PostIt from "./layer/PostIt";
+import PostIts from "./layer/PostIts";
 // import PageController from "./components/PageController";
 
 export default function Index() {
@@ -14,9 +14,10 @@ export default function Index() {
     <ColorThemeProvider>
       <div className={"global_wrap" + (lnbFold ? " lnb_fold" : "")}>
         <GlobalLnb fold={lnbFold} onoff={setLnbFold}></GlobalLnb>
-        <PostIt isActive={postItActive}></PostIt>
+        <PostIts isActive={postItActive}></PostIts>
         <div className="global_container">
           <Header
+            fold={lnbFold}
             isActive={postItActive}
             postItActive={setPostItActive}
           ></Header>
@@ -26,6 +27,7 @@ export default function Index() {
           <Footer />
         </div>
       </div>
+      <div id="modal-root"></div>
     </ColorThemeProvider>
   );
 }

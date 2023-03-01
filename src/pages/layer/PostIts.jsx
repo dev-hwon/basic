@@ -2,7 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
-export default function PostIt({ isActive }) {
+export default function PostIts({ isActive }) {
   return (
     <div className={"layer_postIt" + (isActive ? " active" : "")}>
       <h3>Post It</h3>

@@ -39,6 +39,7 @@
     --theme-shadow : 3px 3px 6px rgba(0,0,0,.2), -3px -3px 6px rgba(0,0,0,.2);
     --theme-shadow-hover : 5px 5px 10px rgba(0,0,0,.4), -5px -5px 10px rgba(0,0,0,.4);
     --theme-anchor : #ffc107;
+    --color-mv: #5570F1;
 }
 *{
     margin:0;
@@ -84,7 +85,7 @@ img {
 }
 button { cursor:pointer; }
 /* a Css */
-a{cursor:pointer; color:var(--theme-anchor); text-decoration:none }
+a{ cursor:pointer; text-decoration:none }
 /*
 a:link,a:visited,a:active{text-decoration:none}
 a:hover{text-decoration:underline} 
@@ -198,7 +199,7 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 /* ----------------------------------------------------------------
     @공통_container
 -----------------------------------------------------------------*/
-.container { position:relative; min-width: 1200px; min-height: calc(100vh - 126px);}
+.container { position:relative; min-width: 1200px; min-height: calc(100vh - 120px);}
 
 /* 반응형 제거
 @media (max-width:767px){.container {width:100%}}
@@ -393,6 +394,7 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 .color-orange {color:#ffa500;}
 .color-scarlet {color:#ff3f19;}
 .color-pink {color:#f6707d;}
+.color-mv {color: var(--color-mv)!important;}
 /* ----------------------------------------------------------------
     @공통_버튼
 -----------------------------------------------------------------*/
@@ -489,11 +491,12 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
 /* ----------------------------------------------------------------
     @공통_글로벌레이아웃
 -----------------------------------------------------------------*/
-.global_wrap { --global-lnb-width: 250px; --postIt-width: 250px; background-color: var(--theme-bg2); color: var(--theme-fontcolor);  }
-.global_wrap.lnb_fold { --global-lnb-width: 60px }
+.global_wrap { --global-lnb-width: 250px; --postIt-width: 250px; background-color: var(--theme-bg2); color: var(--theme-fontcolor); overflow: hidden; }
+.global_wrap.lnb_fold { --global-lnb-width: 88px }
 
 .global_wrap > div { flex:0 0 auto; } 
-.global_wrap .global_lnb { position: fixed; top: 0; left: 0; width: var(--global-lnb-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transition: width .4s; z-index: 100; padding:10px; overflow-y: auto; overflow-x: hidden;}
+.global_wrap .global_lnb { position: fixed; top: 0; left: 0; width: var(--global-lnb-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transition: width .4s; z-index: 100; padding:16px; overflow-y: auto; overflow-x: hidden;}
+.global_wrap.lnb_fold .global_lnb:hover { width: 250px; transition-duration: 0s; }
 
 .global_wrap .layer_postIt { position: fixed; top: 0; right: 0; height: 100%; padding:15px; width:var(--postIt-width); background-color: #ccc; transform: translateX(var(--postIt-width)); transition: width .4s, transform .4s; z-index: 100; overflow: auto;}
 .global_wrap .layer_postIt.active {transform: translateX(0);}
@@ -527,7 +530,7 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
                        테스트용 css
 -----------------------------------------------------------------*/
 
-header, footer { position:sticky; top:0; left:0; background-color: #ccc; display: flex; height:60px; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;} 
+footer { position:sticky; top:0; left:0; background-color: #ccc; display: flex; height:60px; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;} 
 button {outline: none; box-shadow: none!important; border:1px solid #333; border-radius: 2px; font-size: 12px; padding:0 4px; min-height: 20px;}
 button.active,
 button.fold { background-color: #0d6efd; border-color:#0d6efd; color:#fff;} 
@@ -543,7 +546,7 @@ background: #f3a95f!important;
 .nav_menu { padding:20px; }
 .nav_menu ul li { margin-bottom:20px; }
 
-.btn_lnb_controll { width:40px; height:40px; border:none; background-color: #000;  }
+.btn_lnb_controll {  background-color: #000;  }
 
 .col_custom { min-width:258px;}
 .col_auto { flex: 1 1 auto!important;}

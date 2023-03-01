@@ -6,23 +6,41 @@ const GridTitle = styled.div`
   margin-bottom: 16px;
 `;
 const GridWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  ${(props) =>
+    props.colWidth &&
+    css`
+      > div {
+        width: ${props.colWidth}${props.colWidthUnit ? props.colWidthUnit : ""};
+      }
+    `}
+  ${(props) =>
+    props.colHeight &&
+    css`
+      height: ${props.colHeight}${props.colHeightUnit ? props.colHeightUnit : ""};
+    `}
   ${(props) =>
     props.colGap &&
     css`
       margin: 0 ${props.colGap * -0.5}px;
       > div {
         padding: 0 ${props.colGap * 0.5}px;
-        margin-bottom: ${props.colGap}px;
+        margin-bottom: ${props.colNomargin
+          ? props.colNomargin
+          : props.colGap}px;
       }
     `}
   ${(props) =>
-    props.colWidth &&
+    props.colAlign &&
     css`
-      > div {
-        width: ${props.colWidth}${props.colWidthUnit ? props.colWidthUnit : "px"};
-      }
+      justify-content: ${props.colAlign};
+    `}
+  ${(props) =>
+    props.colVerticalAlign &&
+    css`
+      align-items: ${props.colVerticalAlign};
     `}
 `;
 
@@ -34,7 +52,6 @@ const Box = styled.div`
   height: 100%;
   min-height: 20px;
   border-radius: 12px;
-  overflow: hidden;
 `;
 const BoxHead = styled.div`
   font-size: 16px;

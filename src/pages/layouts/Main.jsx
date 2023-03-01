@@ -15,11 +15,20 @@ import TodosHeader from "../../components/todos/TodosHeader";
 import TodoAchievementChart from "../../components/todos/TodoAchievementChart";
 import { Box, BoxCont, GridTitle, GridCol, GridWrap, BoxHead } from "./Layout";
 import Reviews from "../reviews/Reviews";
+import Modal from "../../components/modal/Modal";
 
 const filters = ["all", "active", "completed"];
 export default function Main() {
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
+  const [modalVisible, setModalVisible] = useState(false);
   const [filter, setFilter] = useState(filters[0]);
+
+  const openModal = (e) => {
+    setModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
@@ -44,6 +53,22 @@ export default function Main() {
         <GridCol>
           <Box>
             <BoxHead>지역 리뷰 비교</BoxHead>
+            <button
+              onClick={openModal}
+              className="common_btn btn_sm btn_default bt__detail_view"
+            >
+              자세히보기
+            </button>
+            {modalVisible && (
+              <Modal
+                visible={modalVisible}
+                closable={true}
+                maskClosable={true}
+                onClose={closeModal}
+              >
+                레이어내용!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              </Modal>
+            )}
           </Box>
         </GridCol>
         <GridCol>
@@ -63,7 +88,7 @@ export default function Main() {
               filter={filter}
               onFilterChange={setFilter}
             />
-            <TodoList filter={filter} />
+            <TodoList filter={"active"} />
           </Box>
         </GridCol>
         <GridCol>
@@ -73,7 +98,7 @@ export default function Main() {
               filter={filter}
               onFilterChange={setFilter}
             />
-            <TodoList filter={filter} />
+            <TodoList filter={"completed"} />
           </Box>
         </GridCol>
         <GridCol>
