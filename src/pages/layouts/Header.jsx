@@ -34,6 +34,12 @@ export default function Header({ fold, isActive, postItActive }) {
                 클리닉관리
               </Link>
             </GridCol>
+            <GridCol>
+              <PostItButton
+                onClick={handleClick}
+                className={isActive ? "active" : ""}
+              ></PostItButton>
+            </GridCol>
           </GridWrap>
         </GridCol>
         <GridCol className="text_right">
@@ -54,12 +60,6 @@ export default function Header({ fold, isActive, postItActive }) {
             </GridCol>
             <GridCol>
               <Link to="">고객센터</Link>
-            </GridCol>
-            <GridCol>
-              <PostItButton
-                onClick={handleClick}
-                className={isActive ? "active" : ""}
-              ></PostItButton>
             </GridCol>
           </GridWrap>
         </GridCol>

@@ -4,7 +4,7 @@ export default function AuthorList({ author, onDelete }) {
   const { id, name } = author;
   const handleDelete = () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      fetch(`//localhost:8001/authors/${id}`, {
+      fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}/${id}`, {
         method: "DELETE",
       })
         .then((res) => {

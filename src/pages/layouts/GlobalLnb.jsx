@@ -26,16 +26,19 @@ export default function GlobalLnb({ fold, onoff }) {
         <nav className="nav_menu nav_menu1">
           <ul>
             <li>
-              <Link to={"/layout/testgrid"}>그리드</Link>
+              <Link to={"/layout/main"}>메인</Link>
             </li>
             <li>
-              <Link to={"/layout/main"}>메인테스트</Link>
+              <Link to={"/test"}>임시링크1</Link>
+            </li>
+            <li>
+              <Link to={"/layout/main"}>임시링크2</Link>
+            </li>
+            <li>
+              <Link to={"/layout/main"}>임시링크3</Link>
             </li>
             <li>
               <Link to={"/board"}>보드</Link>
-            </li>
-            <li>
-              <Link to={"/login"}>로그인</Link>
             </li>
             <li>
               <Link to={"/setting"}>setting</Link>

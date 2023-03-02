@@ -19,16 +19,18 @@ export default function AddAuthor({ onAdd, author }) {
       return;
     }
     // 추가
-    fetch("http://localhost:8001/authors", {
+    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: uuidv4(), name }),
+      // body: JSON.stringify({ id: uuidv4(), name }), 고유값 한군대서 사용시
+      body: JSON.stringify({ id: "author" + (+author.length + 1), name }),
     })
       .then((response) => response.json())
       .then(() => {
-        onAdd({ id: uuidv4(), name });
+        // onAdd({ id: uuidv4(), name }); 고유값 한군대서 사용시
+        onAdd({ id: "author" + (+author.length + 1), name });
       });
 
     // 초기화

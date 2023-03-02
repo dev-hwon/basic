@@ -29,6 +29,7 @@ export default function Main() {
   const closeModal = () => {
     setModalVisible(false);
   };
+
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
@@ -83,31 +84,16 @@ export default function Main() {
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
-            <TodosHeader
-              filters={filters}
-              filter={filter}
-              onFilterChange={setFilter}
-            />
             <TodoList filter={"active"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodosHeader
-              filters={filters}
-              filter={filter}
-              onFilterChange={setFilter}
-            />
             <TodoList filter={"completed"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodosHeader
-              filters={filters}
-              filter={filter}
-              onFilterChange={setFilter}
-            />
             <TodoList filter={filter} />
           </Box>
         </GridCol>

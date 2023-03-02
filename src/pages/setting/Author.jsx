@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
-import useFetch from "../../hooks/useFetch";
 
 export default function Author() {
   const [author, setAuthor] = useState([]);
@@ -11,7 +10,7 @@ export default function Author() {
     setAuthor(author.filter((t) => t.id !== deletedAuthor.id));
 
   useEffect(() => {
-    fetch("http://localhost:8001/authors")
+    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
       .then((res) => res.json())
       .then((res) => {
         let arr = res;
