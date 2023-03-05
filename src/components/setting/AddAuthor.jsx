@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
+import AuthorReducer from "./AuthorReducer";
+//https://velog.io/@hwang-eunji/React-Hooks-5-useReducer
 export default function AddAuthor({ onAdd, author }) {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
+
+  const [name, dispatch] = useReducer(AuthorReducer, "");
   const handleChange = (e) => {
-    setName(e.target.value);
+    // const changeName = e.target.value;
+    // dispatch({ type: "change", changeName });
+    dispatch({ type: "change", name: e.target.value });
   };
+
+  // setName(e.target.value);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // 공백 입력시
@@ -13,8 +21,8 @@ export default function AddAuthor({ onAdd, author }) {
       return;
     }
     // 같은값 입력시
-    let sameCount = author.filter((a) => a.name === name.trim()).length;
-    if (sameCount > 0) {
+    let sameCount = author.findIndex((a) => a.name === name);
+    if (sameCount !== -1) {
       alert("같은 이름이 있습니다.");
       return;
     }
@@ -24,17 +32,15 @@ export default function AddAuthor({ onAdd, author }) {
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ id: uuidv4(), name }), 고유값 한군대서 사용시
-      body: JSON.stringify({ id: "author" + (+author.length + 1), name }),
+      body: JSON.stringify({ id: uuidv4(), name }),
     })
       .then((response) => response.json())
       .then(() => {
-        // onAdd({ id: uuidv4(), name }); 고유값 한군대서 사용시
-        onAdd({ id: "author" + (+author.length + 1), name });
+        onAdd({ id: uuidv4(), name });
       });
 
     // 초기화
-    setName("");
+    dispatch({ type: "update", name: "" });
   };
 
   return (

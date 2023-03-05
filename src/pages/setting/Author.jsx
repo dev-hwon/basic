@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useReducer } from "react";
 import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
+
+// let data = "";
+// fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
+//   .then((res) => res.json())
+//   .then((res) => {
+//     let arr = res;
+//     data = arr.reverse();
+//   });
+// console.log(data);
 
 export default function Author() {
   const [author, setAuthor] = useState([]);
@@ -15,7 +23,6 @@ export default function Author() {
       .then((res) => {
         let arr = res;
         arr.reverse();
-        console.log(arr);
         setAuthor(arr);
       });
   }, []);

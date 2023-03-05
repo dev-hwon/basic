@@ -8,7 +8,6 @@ import BoardList from "./pages/board/BoardList";
 import EmptyPage from "./pages/EmptyPage";
 import BoardIndex from "./pages/board/BoardIndex";
 import SettingIndex from "./pages/setting/SettingIndex";
-import Testjson from "./pages/test/Testjson";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +20,6 @@ const router = createBrowserRouter([
       { path: "/setting", element: <SettingIndex /> },
       { path: "/board", element: <BoardIndex /> },
       { path: "/board/:boardNname", element: <BoardList /> },
-      { path: "/test", element: <Testjson /> },
     ],
   },
 ]);
