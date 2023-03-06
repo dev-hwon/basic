@@ -1,6 +1,6 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
-export default function Todo({ todo, onUpdate, onDelete }) {
+export default function TodoList({ todo, onUpdate, onDelete }) {
   const { id, text, status } = todo;
   const handleChange = (e) => {
     const status = e.target.checked ? "completed" : "active";

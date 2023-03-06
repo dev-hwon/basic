@@ -1,17 +1,27 @@
-import Moment from "react-moment";
+// import Moment from "react-moment";
 import moment from "moment";
-
-const current = new Date();
-const cerrentDate = moment(current).format("DD MM YYYY");
-const currenttime = moment(current).format("hh:mm:ss");
+// https://flamingotiger.github.io/javascript/momentjs/
+export const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+export const current = new Date();
+export const currentDate = moment(current).format("YYYY-DD-MM");
+export const currentDataMonth = moment(current).format("MM");
+export const currenttime = moment(current).format("hh:mm:ss");
 // console.log(moment(new Date()).format("YYYY년 MM월 DD일  HH시mm분ss초"));
 
-const dayWork = [
-  { title: "event 1", date: "2023-02-13" },
-  { title: "event 2", date: "2023-02-14" },
-  { title: "event 3", date: "2023-02-18" },
-  { title: "event 4", date: "2023-02-19" },
-  { title: "event 5", date: "2023-02-22" },
-];
+// export function getData() {
+//   fetch(todosUrl)
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then((result) => {
+//       console.log(result);
+//     })
+//     .catch(() => {
+//       console.log("error!");
+//     });
+// }
+// let data = getData();
+// let monthWorkData = data.filter((d) => d.todos);
+export const monthWorkList = [];
 
-export { current, cerrentDate, currenttime, dayWork };
+export default moment;

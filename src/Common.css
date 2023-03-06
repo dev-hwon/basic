@@ -83,6 +83,7 @@ img {
     clear:both;
     *zoom:1;
 }
+em { font-style: normal;}
 button { cursor:pointer; }
 /* a Css */
 a{ cursor:pointer; text-decoration:none }
@@ -409,7 +410,6 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
     border-radius: 4px;
     cursor: pointer;
     height:var(--form-sm);
-    width: 100%;
 }
 /* height 56*/
 .btn_area.btn_area_lg{

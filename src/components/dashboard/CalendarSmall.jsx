@@ -1,30 +1,53 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "../../circle_percentage.css";
 import styled from "styled-components";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarSmall.css";
-import { dayWork } from "../../components/Current";
+import { GridCol, GridWrap } from "../../pages/layouts/Layout";
 
-function Dotted() {
-  return (
-    <div
-      className="dotted"
-      style={{
-        height: "8px",
-        width: "8px",
-        backgroundColor: "#f87171",
-        borderRadius: "50%",
-        display: "flex",
-        marginLeft: "1px",
-      }}
-    ></div>
-  );
-}
+const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+const current = new Date();
+const currentDate = moment(current).format("YYYY-DD-MM");
+const currentDataMonth = moment(current).format("MM");
+const currenttime = moment(current).format("hh:mm:ss");
 
 export default function CalendarSmall({ setSDate }) {
+  const [workDate, setWorkDate] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`)
+      .then((res) => res.json())
+      .then((res) => {
+        const todoList = [];
+        res.map((t) => t.todos.map((tt) => todoList.push(tt)));
+        setWorkDate(todoList);
+      })
+      .catch(() => {
+        console.log("error!");
+        // dispatch({ type: "AUTHOR_ERROR" });
+      });
+  }, []);
+
+  // 이번달 시작일
+  const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
+  // 이번달 마지막일
+  const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
+  // 이번달 포함리스트 필터링
+  const thisMonthList = workDate.filter((td) =>
+    moment(td.todosDate).isBetween(startOfMonth, endOfMonth) ? td : ""
+  );
+  // 이번달리스트 미작업리스트갯수
+  const thisMonthActiveCount = thisMonthList.filter(
+    (list) => list.todosStatus === "active"
+  ).length;
+  // 이번달리스트 완료갯수
+  const thisMonthCompleteCount = thisMonthList.filter(
+    (list) => list.todosStatus === "complete"
+  ).length;
+
   return (
     <>
       <Calendar
@@ -39,6 +62,7 @@ export default function CalendarSmall({ setSDate }) {
         next2Label={null}
         showNavigation={true} // 상단날짜네비게이션
         showNeighboringMonth={true} // 이전,이후달의 날짜 노출여부
+        // 나중에...일자에 표시..할수도있을듯하여...일단남겨둠
         // onClickDay={(date) =>
         //   console.log(moment(date).format("YYYY-MM-DD"))
         // }
@@ -65,6 +89,52 @@ export default function CalendarSmall({ setSDate }) {
         //     );
         // }}
       ></Calendar>
+
+      <GridWrap className="" colWidth={50} colWidthUnit="%">
+        <GridCol>
+          <Status className="">
+            완료<em>{thisMonthCompleteCount}</em>
+          </Status>
+        </GridCol>
+        <GridCol>
+          <Status className="">
+            미처리<em>{thisMonthActiveCount}</em>
+          </Status>
+        </GridCol>
+      </GridWrap>
     </>
   );
 }
+
+const Status = styled.div`
+  font-size: 13px;
+  font-weight: 500;
+  color: #000;
+  text-align: center;
+  padding: 8px 0 22px;
+  > em {
+    display: inline-block;
+    width: 32px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #e2e5ef;
+    margin-left: 4px;
+  }
+`;
+
+// function Dotted() {
+//   return (
+//     <div
+//       className="dotted"
+//       style={{
+//         height: "8px",
+//         width: "8px",
+//         backgroundColor: "#f87171",
+//         borderRadius: "50%",
+//         display: "flex",
+//         marginLeft: "1px",
+//       }}
+//     ></div>
+//   );
+// }

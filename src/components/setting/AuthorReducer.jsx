@@ -1,15 +1,33 @@
-import { v4 as uuidv4 } from "uuid";
-
-export default function AuthorReducer(name, action) {
+export default function AuthorReducer(author, action) {
   switch (action.type) {
-    case "update": {
-      // updateData(name);
-      return "";
+    case "AUTHOR_SUCCESS":
+      return {
+        loading: false,
+        errorMessage: "",
+        authors: action.dataReverse, // res.data payload로 전달
+      };
+    case "AUTHOR_ERROR":
+      return {
+        loading: false,
+        errorMessage: "Something went wrong!",
+        authors: {},
+      };
+    case "AUTHOR_ADD": {
+      const { addTarget } = action;
+      return {
+        ...author,
+        authors: [addTarget, ...author.authors],
+      };
     }
-    case "change": {
-      return action.name;
-      // const { changeName } = action;
-      // return changeName;
+    case "AUTHOR_DELETE": {
+      const { authors, deleteTarget } = action;
+      return {
+        ...author,
+        authors: authors.filter((a) => a.id !== deleteTarget.id),
+      };
+    }
+    case "AUTHOR_CHANGE": {
+      return author;
     }
     default: {
       throw Error(`알수 없는 액션 타입 : ${action.type}`);

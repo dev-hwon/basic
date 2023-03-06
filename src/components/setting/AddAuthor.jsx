@@ -3,16 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import AuthorReducer from "./AuthorReducer";
 //https://velog.io/@hwang-eunji/React-Hooks-5-useReducer
 export default function AddAuthor({ onAdd, author }) {
-  // const [name, setName] = useState("");
-
-  const [name, dispatch] = useReducer(AuthorReducer, "");
+  const { authors } = author;
+  const [name, setName] = useState("");
   const handleChange = (e) => {
-    // const changeName = e.target.value;
-    // dispatch({ type: "change", changeName });
-    dispatch({ type: "change", name: e.target.value });
+    setName(e.target.value);
   };
-
-  // setName(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +16,7 @@ export default function AddAuthor({ onAdd, author }) {
       return;
     }
     // 같은값 입력시
-    let sameCount = author.findIndex((a) => a.name === name);
+    let sameCount = authors.findIndex((a) => a.name === name);
     if (sameCount !== -1) {
       alert("같은 이름이 있습니다.");
       return;
@@ -40,7 +35,7 @@ export default function AddAuthor({ onAdd, author }) {
       });
 
     // 초기화
-    dispatch({ type: "update", name: "" });
+    setName("");
   };
 
   return (

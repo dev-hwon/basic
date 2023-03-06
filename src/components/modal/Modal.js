@@ -10,6 +10,7 @@ function Modal({
   closable,
   visible,
   children,
+  width,
 }) {
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -22,7 +23,6 @@ function Modal({
       onClose(e);
     }
   };
-
   useEffect(() => {
     document.body.style.cssText = `position: fixed; top: -${window.scrollY}px`;
     return () => {
@@ -41,13 +41,17 @@ function Modal({
         tabIndex={-1}
         visible={visible}
       >
-        <ModalInner tabIndex={0} className="modal-inner vertical_scroll">
-          <ModalHeader>
+        <ModalInner
+          tabIndex={0}
+          className="modal-inner vertical_scroll"
+          width={width}
+        >
+          <ModalHeader className="modal_haed">
             {closable && (
               <CloseButton className="modal-close" onClick={close} />
             )}
           </ModalHeader>
-          {children}
+          <ModalContent>{children}</ModalContent>
         </ModalInner>
       </ModalWrapper>
     </Portal>
@@ -144,13 +148,14 @@ const ModalInner = styled.div`
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
   border-radius: 10px;
-  width: auto;
+  width: ${(props) => (props.width ? props.width : "auto")};
   top: 50%;
   transform: translateY(-50%);
+  max-width: 90%;
+  max-height: 90%;
   margin: 0 auto;
   padding: 0 0 30px;
   transition: all 0.4s;
-  max-height: 90%;
   overflow: auto;
   text-align: center;
   animation: ${modalShow} 0.3s;
@@ -164,5 +169,8 @@ const ModalHeader = styled.div`
   min-height: 60px;
   line-height: 60px;
   background-color: #fff;
+`;
+const ModalContent = styled.div`
+  padding: 20px;
 `;
 export default Modal;

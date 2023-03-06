@@ -1,35 +1,43 @@
 import React, { useCallback, useState } from "react";
 import "../../circle_percentage.css";
-import Moment from "react-moment";
-import moment from "moment";
-import {
+import moment, {
   current,
-  cerrentDate,
+  currentDate,
   currenttime,
   dayWork,
+  getData,
 } from "../../components/Current";
 import CalendarSmall from "../../components/dashboard/CalendarSmall";
 // import CalendarTimeline from "../../components/dashboard/CalendarTimeline";
-import TodoList from "../todos/TodoList";
+import TodoIndex from "../todos/TodoIndex";
 import TodosHeader from "../../components/todos/TodosHeader";
 import TodoAchievementChart from "../../components/todos/TodoAchievementChart";
-import { Box, BoxCont, GridTitle, GridCol, GridWrap, BoxHead } from "./Layout";
+import {
+  Box,
+  BoxHead,
+  BoxCont,
+  GridTitle,
+  TitleText,
+  GridCol,
+  GridWrap,
+  ButtonGroup,
+} from "./Layout";
 import Reviews from "../reviews/Reviews";
 import Modal from "../../components/modal/Modal";
-
+import Addtodo from "../../components/todos/Addtodo";
+let num = 0;
 const filters = ["all", "active", "completed"];
 export default function Main() {
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalProps, setModalProps] = useState(
+    { visible: false },
+    { width: "90%" }
+  );
   const [filter, setFilter] = useState(filters[0]);
 
-  const openModal = (e) => {
-    setModalVisible(true);
-  };
   const closeModal = () => {
-    setModalVisible(false);
+    setModalProps({ visible: false });
   };
-
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
@@ -54,22 +62,11 @@ export default function Main() {
         <GridCol>
           <Box>
             <BoxHead>지역 리뷰 비교</BoxHead>
-            <button
-              onClick={openModal}
-              className="common_btn btn_sm btn_default bt__detail_view"
-            >
-              자세히보기
-            </button>
-            {modalVisible && (
-              <Modal
-                visible={modalVisible}
-                closable={true}
-                maskClosable={true}
-                onClose={closeModal}
-              >
-                레이어내용!!!!!!!!!!!!!!!!!!!!!!!!!!!
-              </Modal>
-            )}
+            <ModalOpenBtn
+              buttonName="자세히보기"
+              modalWidth="600px"
+              modalProps={setModalProps}
+            ></ModalOpenBtn>
           </Box>
         </GridCol>
         <GridCol>
@@ -80,21 +77,30 @@ export default function Main() {
         </GridCol>
       </GridWrap>
 
-      <GridTitle className="mt20">투두리스트1</GridTitle>
+      <GridTitle className="mt20">
+        <TitleText>투두리스트1</TitleText>
+        <ButtonGroup position="">
+          <ModalOpenBtn
+            buttonName="일감추가"
+            modalWidth="400px"
+            modalProps={setModalProps}
+          ></ModalOpenBtn>
+        </ButtonGroup>
+      </GridTitle>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
-            <TodoList filter={"active"} />
+            <TodoIndex filter={"active"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoList filter={"completed"} />
+            <TodoIndex filter={"completed"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoList filter={filter} />
+            <TodoIndex filter={filter} />
           </Box>
         </GridCol>
         <GridCol>
@@ -104,7 +110,7 @@ export default function Main() {
               filter={filter}
               onFilterChange={setFilter}
             />
-            <TodoList filter={filter} />
+            <TodoIndex filter={filter} />
           </Box>
         </GridCol>
       </GridWrap>
@@ -112,9 +118,11 @@ export default function Main() {
       <GridTitle className="mt20">투두리스트2</GridTitle>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
-          <Moment interval={1000}>1976-04-19T12:59-0500</Moment>
-          <br />
-          <Moment interval={10000} format="hh:mm:ss" date={current}></Moment>
+          <Box>
+            {currentDate}
+            <br />
+            {currenttime}
+          </Box>
         </GridCol>
         <GridCol>
           <Box>2</Box>
@@ -126,6 +134,33 @@ export default function Main() {
           <Box>4</Box>
         </GridCol>
       </GridWrap>
+      {modalProps.visible && (
+        <Modal
+          visible={modalProps.visible}
+          closable={true}
+          maskClosable={true}
+          onClose={closeModal}
+          width={modalProps.modalWidth}
+        >
+          <Addtodo></Addtodo>
+        </Modal>
+      )}
     </>
+  );
+}
+
+function ModalOpenBtn({ modalWidth, buttonName, modalProps }) {
+  const openModal = () => {
+    console.log(num++);
+    modalProps({ visible: true, modalWidth });
+  };
+
+  return (
+    <button
+      onClick={openModal}
+      className="common_btn btn_sm btn_default bt__detail_view"
+    >
+      {buttonName}
+    </button>
   );
 }

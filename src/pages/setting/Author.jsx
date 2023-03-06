@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
+import AuthorReducer from "../../components/setting/AuthorReducer";
 
 // let data = "";
 // fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
@@ -10,35 +11,68 @@ import AuthorList from "../../components/setting/AuthorList";
 //     data = arr.reverse();
 //   });
 // console.log(data);
-
+const initialAuthor = {
+  loading: true,
+  errorMessage: "",
+  authors: [],
+};
 export default function Author() {
-  const [author, setAuthor] = useState([]);
-  const handleAdd = (AddAuthor) => setAuthor([AddAuthor, ...author]);
-  const handleDelete = (deletedAuthor) =>
-    setAuthor(author.filter((t) => t.id !== deletedAuthor.id));
+  // const [author, setAuthor] = useState([]);
+  // const handleAdd = (AddAuthor) => setAuthor([AddAuthor, ...author]);
+  // const handleDelete = (deletedAuthor) =>
+  //   setAuthor(author.filter((t) => t.id !== deletedAuthor.id));
+
+  const [author, dispatch] = useReducer(AuthorReducer, initialAuthor);
+  const { loading, errorMessage, authors } = author;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
       .then((res) => res.json())
       .then((res) => {
-        let arr = res;
-        arr.reverse();
-        setAuthor(arr);
+        let data = res;
+        let dataReverse = data.reverse();
+        dispatch({ type: "AUTHOR_SUCCESS", dataReverse });
+      })
+      .catch(() => {
+        dispatch({ type: "AUTHOR_ERROR" });
       });
   }, []);
+
+  const handleAdd = (addTarget) => {
+    dispatch({
+      type: "AUTHOR_ADD",
+      addTarget,
+    });
+  };
+
+  const handleDelete = (deleteTarget) => {
+    dispatch({
+      type: "AUTHOR_DELETE",
+      ...author,
+      deleteTarget,
+      // authors: author.authors.filter((a) => a.id !== target.id),
+    });
+  };
+
   return (
     <div>
       글쓴이 목록
       <AddAuthor author={author} onAdd={handleAdd}></AddAuthor>
-      <ul>
-        {author.map((a) => (
-          <AuthorList
-            key={a.id}
-            author={a}
-            onDelete={handleDelete}
-          ></AuthorList>
-        ))}
-      </ul>
+      {loading ? (
+        "loading.."
+      ) : (
+        <ul>
+          {authors.map((a) => (
+            <AuthorList
+              key={a.id}
+              author={a}
+              onDelete={handleDelete}
+            ></AuthorList>
+          ))}
+        </ul>
+      )}
+      {errorMessage ? errorMessage : null}
+      {/*  */}
     </div>
   );
 }

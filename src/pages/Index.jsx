@@ -4,7 +4,7 @@ import ColorThemeProvider, { useColorTheme } from "../context/ColorTheme";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import GlobalLnb from "./layouts/GlobalLnb";
-import PostIts from "./layer/PostIts";
+import PostIts from "./postit/PostIts";
 // import PageController from "./components/PageController";
 
 export default function Index() {

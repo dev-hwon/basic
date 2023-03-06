@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Addtodo from "../../components/todos/Addtodo";
-import Todo from "../../components/todos/Todo";
+import TodoList from "../../components/todos/TodoList";
 
-export default function TodoList({ filter }) {
+export default function TodoIndex({ filter }) {
   const [todos, setTodos] = useState(() => readTodosFromLocalStorage());
   const handleAdd = (todo) => setTodos([...todos, todo]);
   const handleupdate = (updated) =>
@@ -19,7 +19,7 @@ export default function TodoList({ filter }) {
     <section>
       <ul>
         {filtered.map((item) => (
-          <Todo
+          <TodoList
             key={item.id}
             todo={item}
             onUpdate={handleupdate}

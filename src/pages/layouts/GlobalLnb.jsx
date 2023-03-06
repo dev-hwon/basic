@@ -29,13 +29,7 @@ export default function GlobalLnb({ fold, onoff }) {
               <Link to={"/layout/main"}>메인</Link>
             </li>
             <li>
-              <Link to={"/test"}>임시링크1</Link>
-            </li>
-            <li>
-              <Link to={"/layout/main"}>임시링크2</Link>
-            </li>
-            <li>
-              <Link to={"/layout/main"}>임시링크3</Link>
+              <Link to={"/file"}>파일함</Link>
             </li>
             <li>
               <Link to={"/board"}>보드</Link>

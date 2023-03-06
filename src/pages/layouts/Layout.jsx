@@ -5,6 +5,10 @@ const GridTitle = styled.div`
   font-weight: bold;
   margin-bottom: 16px;
 `;
+const TitleText = styled.div`
+  font-size: inherit;
+  font-weight: inherit;
+`;
 const GridWrap = styled.div`
   width: 100%;
   display: flex;
@@ -66,4 +70,17 @@ const BoxCont = styled.div`
   font-size: 13px;
   color: #333;
 `;
-export { GridTitle, GridWrap, GridCol, Box, BoxHead, BoxFoot, BoxCont };
+const ButtonGroup = styled.div`
+  display: flex;
+`;
+export {
+  GridTitle,
+  TitleText,
+  GridWrap,
+  GridCol,
+  Box,
+  BoxHead,
+  BoxFoot,
+  BoxCont,
+  ButtonGroup,
+};
