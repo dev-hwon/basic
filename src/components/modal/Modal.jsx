@@ -1,16 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes, css } from "styled-components";
 import Portal from "./Portal";
 
-function Modal({
+export function ModalOpenBtn({
+  modalWidth,
+  className,
+  children,
+  buttonName,
+  modalProps,
+}) {
+  const openModal = () => {
+    modalProps({
+      visible: true,
+      modalWidth: modalWidth,
+      maskClosable: true,
+      closable: true,
+      className: className,
+      children: children,
+    });
+  };
+  return (
+    <button
+      onClick={openModal}
+      className="common_btn btn_sm btn_default bt__detail_view"
+    >
+      {buttonName}
+    </button>
+  );
+}
+
+export default function Modal({
+  visible,
+  modalWidth,
   className,
   onClose,
   maskClosable,
   closable,
-  visible,
   children,
-  width,
 }) {
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -44,7 +71,7 @@ function Modal({
         <ModalInner
           tabIndex={0}
           className="modal-inner vertical_scroll"
-          width={width}
+          modalWidth={modalWidth}
         >
           <ModalHeader className="modal_haed">
             {closable && (
@@ -148,7 +175,7 @@ const ModalInner = styled.div`
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
   background-color: #fff;
   border-radius: 10px;
-  width: ${(props) => (props.width ? props.width : "auto")};
+  width: ${(props) => (props.modalWidth ? props.modalWidth : "auto")};
   top: 50%;
   transform: translateY(-50%);
   max-width: 90%;
@@ -173,4 +200,3 @@ const ModalHeader = styled.div`
 const ModalContent = styled.div`
   padding: 20px;
 `;
-export default Modal;

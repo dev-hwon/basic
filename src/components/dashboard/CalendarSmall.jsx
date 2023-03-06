@@ -22,7 +22,7 @@ export default function CalendarSmall({ setSDate }) {
       .then((res) => res.json())
       .then((res) => {
         const todoList = [];
-        res.map((t) => t.todos.map((tt) => todoList.push(tt)));
+        res.map((t) => t.todos.map((tl) => todoList.push(tl)));
         setWorkDate(todoList);
       })
       .catch(() => {

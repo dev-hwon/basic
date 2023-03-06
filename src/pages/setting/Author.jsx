@@ -72,7 +72,6 @@ export default function Author() {
         </ul>
       )}
       {errorMessage ? errorMessage : null}
-      {/*  */}
     </div>
   );
 }

@@ -23,16 +23,13 @@ import {
   ButtonGroup,
 } from "./Layout";
 import Reviews from "../reviews/Reviews";
-import Modal from "../../components/modal/Modal";
+import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import Addtodo from "../../components/todos/Addtodo";
-let num = 0;
+
 const filters = ["all", "active", "completed"];
 export default function Main() {
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
-  const [modalProps, setModalProps] = useState(
-    { visible: false },
-    { width: "90%" }
-  );
+  const [modalProps, setModalProps] = useState([]);
   const [filter, setFilter] = useState(filters[0]);
 
   const closeModal = () => {
@@ -62,11 +59,6 @@ export default function Main() {
         <GridCol>
           <Box>
             <BoxHead>지역 리뷰 비교</BoxHead>
-            <ModalOpenBtn
-              buttonName="자세히보기"
-              modalWidth="600px"
-              modalProps={setModalProps}
-            ></ModalOpenBtn>
           </Box>
         </GridCol>
         <GridCol>
@@ -81,36 +73,41 @@ export default function Main() {
         <TitleText>투두리스트1</TitleText>
         <ButtonGroup position="">
           <ModalOpenBtn
-            buttonName="일감추가"
             modalWidth="400px"
+            className=""
+            children={<Addtodo />}
+            buttonName="일감추가"
             modalProps={setModalProps}
-          ></ModalOpenBtn>
+          />
+          <ModalOpenBtn
+            modalWidth="500px"
+            className=""
+            children={<Addtodo />}
+            buttonName="버튼2"
+            modalProps={setModalProps}
+          />
         </ButtonGroup>
       </GridTitle>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
-            <TodoIndex filter={"active"} />
+            <TodoIndex filter={"category1"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoIndex filter={"completed"} />
+            <TodoIndex filter={"category2"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoIndex filter={filter} />
+            <TodoIndex filter={"category3"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodosHeader
-              filters={filters}
-              filter={filter}
-              onFilterChange={setFilter}
-            />
-            <TodoIndex filter={filter} />
+            <TodoIndex filter={"category4"} />
+            {/* <TodoIndex filter={filter} />  */}
           </Box>
         </GridCol>
       </GridWrap>
@@ -137,30 +134,13 @@ export default function Main() {
       {modalProps.visible && (
         <Modal
           visible={modalProps.visible}
-          closable={true}
-          maskClosable={true}
+          modalWidth={modalProps.modalWidth}
+          maskClosable={modalProps.maskClosable}
+          closable={modalProps.closable}
+          children={modalProps.children}
           onClose={closeModal}
-          width={modalProps.modalWidth}
-        >
-          <Addtodo></Addtodo>
-        </Modal>
+        ></Modal>
       )}
     </>
-  );
-}
-
-function ModalOpenBtn({ modalWidth, buttonName, modalProps }) {
-  const openModal = () => {
-    console.log(num++);
-    modalProps({ visible: true, modalWidth });
-  };
-
-  return (
-    <button
-      onClick={openModal}
-      className="common_btn btn_sm btn_default bt__detail_view"
-    >
-      {buttonName}
-    </button>
   );
 }

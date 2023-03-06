@@ -15,7 +15,9 @@
                     "completeDate" : null,
                     "completeTime" : null,
                     "fileList" : null,
-                    "confirm" : null
+                    "confirm" : null,
+                    "reple" : null,
+                    "repleCount" : null
                 },
                 { 
                     "id" : "2",
@@ -25,7 +27,9 @@
                     "completeDate" : null,
                     "completeTime" : null,
                     "fileList" : null,
-                    "confirm" : null
+                    "confirm" : null,
+                    "reple" : null,
+                    "repleCount" : null
                 }
             ]
             

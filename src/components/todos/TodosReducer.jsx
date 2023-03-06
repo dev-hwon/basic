@@ -1,17 +1,32 @@
 export default function TodosReducer(todo, action) {
   switch (action.type) {
     case "TODOS_SUCCESS":
-      const [todos] = action;
+      const { category, filter } = action;
       return {
         loading: false,
         errorMessage: "",
-        authors: todos, // res.data payload로 전달
+        // categorys: category, // res.data payload로 전달
+        categorys: category.filter((list) => list.id === filter), // res.data payload로 전달
       };
-    case "TODOS_SUCCESS": {
+    case "TODOS_ERROR": {
       return {
         loading: false,
         errorMessage: "Something went wrong!",
-        authors: {},
+        categorys: "{}",
+      };
+    }
+    case "TODOS_UPDATE": {
+      return {
+        loading: false,
+        errorMessage: "",
+        categorys: "",
+      };
+    }
+    case "TODOS_DELETE": {
+      return {
+        loading: false,
+        errorMessage: "",
+        categorys: "",
       };
     }
     default: {
