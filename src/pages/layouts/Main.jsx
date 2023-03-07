@@ -74,14 +74,14 @@ export default function Main() {
           <ModalOpenBtn
             modalWidth="400px"
             className=""
-            children={<Addtodo />}
+            children={<Addtodo modalProps={setModalProps} />}
             buttonName="일감추가"
             modalProps={setModalProps}
           />
           <ModalOpenBtn
             modalWidth="500px"
             className=""
-            children={<Addtodo />}
+            children={<Addtodo modalProps={setModalProps} />}
             buttonName="버튼2"
             modalProps={setModalProps}
           />

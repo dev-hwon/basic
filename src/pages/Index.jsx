@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
+import { Outlet } from "react-router-dom";
 import ColorThemeProvider, { useColorTheme } from "../context/ColorTheme";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";

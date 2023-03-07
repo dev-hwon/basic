@@ -1,14 +1,14 @@
 export default function TodosReducer(todo, action) {
   switch (action.type) {
     case "TODOS_SUCCESS":
-      const { datas, objName, filter } = action;
+      const { data, objName, filter } = action;
       return {
         loading: false,
         errorMessage: "",
-        todos: objName === "todos" && datas,
+        todos: objName === "todos" && data,
         categorys:
           objName === "categorys" &&
-          datas.filter((list) => (filter ? list.id === filter : list)),
+          data.filter((list) => (filter ? list.id === filter : list)),
       };
     case "TODOS_ERROR": {
       return {
@@ -18,11 +18,11 @@ export default function TodosReducer(todo, action) {
       };
     }
     case "TODOS_UPDATE": {
-      const { postData } = action;
-
+      console.log("ddd1234");
+      const { adjData } = action;
       return {
         ...todo,
-        categorys: [...todo.todosName, postData],
+        todos: adjData,
       };
     }
     case "TODOS_DELETE": {

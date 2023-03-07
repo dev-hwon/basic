@@ -7,6 +7,10 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarSmall.css";
 import { GridCol, GridWrap } from "../../pages/layouts/Layout";
+import useFetch from "../../hooks/useFetch";
+
+const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
 const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const current = new Date();
@@ -18,26 +22,14 @@ export default function CalendarSmall({}) {
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
   const [workDate, setWorkDate] = useState([]);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`)
-      .then((res) => res.json())
-      .then((res) => {
-        const todoList = [];
-        res.map((t) => t.todos.map((tl) => todoList.push(tl)));
-        setWorkDate(todoList);
-      })
-      .catch(() => {
-        console.log("error!");
-        // dispatch({ type: "AUTHOR_ERROR" });
-      });
-  }, []);
+  const { loading, errorMessage, todos } = useFetch(todosyUrl, "todos");
 
   // 이번달 시작일
   const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
   // 이번달 마지막일
   const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
   // 이번달 포함리스트 필터링
-  const thisMonthList = workDate.filter((td) =>
+  const thisMonthList = todos.filter((td) =>
     moment(td.todosDate).isBetween(startOfMonth, endOfMonth) ? td : ""
   );
   // 이번달리스트 미작업리스트갯수

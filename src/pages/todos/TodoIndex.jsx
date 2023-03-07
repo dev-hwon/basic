@@ -1,23 +1,11 @@
-import React, { useEffect, useReducer, useState, useCallback } from "react";
-import { GetTodos } from "../../components/todos/FetchTodos";
+import React from "react";
 import TodoList from "../../components/todos/TodoList";
+import useFetch from "../../hooks/useFetch";
 const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
 export default function TodoIndex({ filter }) {
-  // const [todos, setTodos] = useState(() => readTodosFromLocalStorage());
-  // const handleAdd = (todo) => setTodos([...todos, todo]);
-  // const handleupdate = (updated) =>
-  //   setTodos(todos.map((t) => (t.id === updated.id ? updated : t)));
-  // const handleDelete = (deleted) =>
-  //   setTodos(todos.filter((t) => t.id !== deleted.id));
-
-  // useEffect(() => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // }, [todos]);
-
-  // const [category, dispatch] = useReducer(TodosReducer, initialTodos);
-  const { loading, errorMessage, todos } = GetTodos(todosyUrl, "todos");
+  const { loading, errorMessage, todos } = useFetch(todosyUrl, "todos");
   const filtered = todos.filter((f) => f.category === filter);
 
   return (
@@ -40,7 +28,7 @@ export default function TodoIndex({ filter }) {
 }
 
 function CategoryList({ filter }) {
-  const { loading, errorMessage, categorys } = GetTodos(
+  const { loading, errorMessage, categorys } = useFetch(
     categoryUrl,
     "categorys"
   );
@@ -60,10 +48,3 @@ function CategoryList({ filter }) {
     </>
   );
 }
-// function getFilteredItems(todos, filter) {
-//   return todos.filter((category) => category.id === filter);
-// }
-// function readTodosFromLocalStorage() {
-//   const todos = localStorage.getItem("todos");
-//   return todos ? JSON.parse(todos) : [];
-// }

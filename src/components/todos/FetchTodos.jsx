@@ -24,20 +24,9 @@ export function GetTodos(url, objName) {
   return category;
 }
 
-const num = 0;
-export function PostTodos(url, targetCategory, postData) {
+export function PostTodos(addData) {
   const [category, dispatch] = useReducer(TodosReducer, initialTodos);
-  fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postData),
-  });
-  // .then((response) => response.json())
-  // .then(() => {
-  //   dispatch({ type: "TODOS_UPDATE", postData });
-  // });
-  // return category;
-  console.log(num++, postData);
+  dispatch({ type: "TODOS_UPDATE", addData });
+  console.log(category);
+  return category;
 }

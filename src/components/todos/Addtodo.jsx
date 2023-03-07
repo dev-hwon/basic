@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { GetTodos, PostTodos } from "../../components/todos/FetchTodos";
+import TodosReducer from "../../hooks/TodosReducer";
+import useFetch from "../../hooks/useFetch";
 import { current, currentDate } from "../Current";
 const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
-export default function Addtodo() {
+export default function Addtodo({ modalProps }) {
   const [targetCategory, setTargetCategory] = useState("");
   const [updateData, setUpdateData] = useState({
     todosName: "",
@@ -18,18 +19,15 @@ export default function Addtodo() {
     repleCount: null,
   });
 
+  const datas = useFetch(todosyUrl, "todos");
+
   const handleChangeTodosName = (e) => {
-    e.persist();
     setUpdateData({ ...updateData, todosName: e.target.value });
-    console.log(updateData);
-  };
-  const handleChangeTargetCategory = (e) => {
-    setTargetCategory(e.target.value);
-    console.log(targetCategory);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (
       updateData.todosName.trim() === "" ||
       updateData.todosName.trim() === 0
@@ -38,41 +36,54 @@ export default function Addtodo() {
       return;
     }
 
-    PostTodos(todosyUrl, targetCategory, {
+    const adjData = {
       id: uuidv4(),
-      todosName: updateData.todosName,
+      category: targetCategory,
       todosStatus: "active",
+      todosName: updateData.todosName,
       todosDate: currentDate,
-      completeDate: updateData.completeDate,
-      completeTime: updateData.completeTime,
-      fileList: updateData.fileList,
-      confirm: updateData.confirm,
-      reple: updateData.reple,
-      repleCount: updateData.repleCount,
-    });
+      ...updateData,
+    };
+
+    fetch(todosyUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(adjData),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        TodosReducer(datas, { type: "TODOS_UPDATE", adjData });
+      });
+
     setUpdateData({ ...updateData, todosName: "" });
+    modalProps({ visible: false });
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <CategoryList selectedCategory={handleChangeTargetCategory} />
+    <form onSubmit={handleSubmit} action="/">
+      <CategoryList selectedCategory={setTargetCategory} />
       <input
         type="text"
         placeholder="dddd"
         value={updateData.todosName}
         onChange={handleChangeTodosName}
       />
-      <button type="submit">Add</button>
+      <button>Add</button>
     </form>
   );
 }
 
 function CategoryList({ selectedCategory }) {
-  const { loading, errorMessage, categorys } = GetTodos(
+  const [active, setActive] = useState("");
+  const { loading, errorMessage, categorys } = useFetch(
     categoryUrl,
     "categorys"
   );
   const handleClick = (e) => {
     selectedCategory(e.target.value);
+    setActive(e.target.value);
   };
   return (
     <>
@@ -81,7 +92,13 @@ function CategoryList({ selectedCategory }) {
       ) : (
         <div className="">
           {categorys.map((dd) => (
-            <button key={dd.id} value={dd.id} onClick={handleClick}>
+            <button
+              type="button"
+              key={dd.id}
+              value={dd.id}
+              className={dd.id === active ? "active" : ""}
+              onClick={handleClick}
+            >
               {dd.name}
             </button>
           ))}
