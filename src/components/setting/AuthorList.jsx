@@ -18,7 +18,7 @@ export default function AuthorList({ author, onDelete }) {
   };
   return (
     <li key={id}>
-      {name}
+      {name}-{id}
       <button type="button" onClick={handleDelete}>
         삭제
       </button>

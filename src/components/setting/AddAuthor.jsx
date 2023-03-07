@@ -22,16 +22,17 @@ export default function AddAuthor({ onAdd, author }) {
       return;
     }
     // 추가
+    const randomID = uuidv4();
     fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: uuidv4(), name }),
+      body: JSON.stringify({ id: randomID, name }),
     })
       .then((response) => response.json())
       .then(() => {
-        onAdd({ id: uuidv4(), name });
+        onAdd({ id: randomID, name });
       });
 
     // 초기화

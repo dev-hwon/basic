@@ -26,11 +26,10 @@ import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import Addtodo from "../../components/todos/Addtodo";
 
-const filters = ["all", "active", "completed"];
+// const filters = ["all", "active", "completed"];
 export default function Main() {
-  const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
   const [modalProps, setModalProps] = useState([]);
-  const [filter, setFilter] = useState(filters[0]);
+  // const [filter, setFilter] = useState(filters[0]);
 
   const closeModal = () => {
     setModalProps({ visible: false });
@@ -63,7 +62,7 @@ export default function Main() {
         </GridCol>
         <GridCol>
           <Box>
-            <CalendarSmall setSDate={setSDate}></CalendarSmall>
+            <CalendarSmall />
             {/* <div className="text_center bold">Selected Date: {sDate}</div> */}
           </Box>
         </GridCol>
@@ -95,18 +94,14 @@ export default function Main() {
           </Box>
         </GridCol>
         <GridCol>
-          <Box>
-            <TodoIndex filter={"category2"} />
-          </Box>
+          <Box>{/* <TodoIndex filter={"category2"} /> */}</Box>
+        </GridCol>
+        <GridCol>
+          <Box>{/* <TodoIndex filter={"category3"} /> */}</Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoIndex filter={"category3"} />
-          </Box>
-        </GridCol>
-        <GridCol>
-          <Box>
-            <TodoIndex filter={"category4"} />
+            {/* <TodoIndex filter={"category4"} /> */}
             {/* <TodoIndex filter={filter} />  */}
           </Box>
         </GridCol>

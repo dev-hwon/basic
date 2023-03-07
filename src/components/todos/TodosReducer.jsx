@@ -1,12 +1,14 @@
 export default function TodosReducer(todo, action) {
   switch (action.type) {
     case "TODOS_SUCCESS":
-      const { category, filter } = action;
+      const { datas, objName, filter } = action;
       return {
         loading: false,
         errorMessage: "",
-        // categorys: category, // res.data payload로 전달
-        categorys: category.filter((list) => list.id === filter), // res.data payload로 전달
+        todos: objName === "todos" && datas,
+        categorys:
+          objName === "categorys" &&
+          datas.filter((list) => (filter ? list.id === filter : list)),
       };
     case "TODOS_ERROR": {
       return {
@@ -16,10 +18,11 @@ export default function TodosReducer(todo, action) {
       };
     }
     case "TODOS_UPDATE": {
+      const { postData } = action;
+
       return {
-        loading: false,
-        errorMessage: "",
-        categorys: "",
+        ...todo,
+        categorys: [...todo.todosName, postData],
       };
     }
     case "TODOS_DELETE": {

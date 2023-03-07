@@ -3,25 +3,12 @@ import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
 import AuthorReducer from "../../components/setting/AuthorReducer";
 
-// let data = "";
-// fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
-//   .then((res) => res.json())
-//   .then((res) => {
-//     let arr = res;
-//     data = arr.reverse();
-//   });
-// console.log(data);
 const initialAuthor = {
   loading: true,
   errorMessage: "",
   authors: [],
 };
 export default function Author() {
-  // const [author, setAuthor] = useState([]);
-  // const handleAdd = (AddAuthor) => setAuthor([AddAuthor, ...author]);
-  // const handleDelete = (deletedAuthor) =>
-  //   setAuthor(author.filter((t) => t.id !== deletedAuthor.id));
-
   const [author, dispatch] = useReducer(AuthorReducer, initialAuthor);
   const { loading, errorMessage, authors } = author;
 
@@ -53,7 +40,6 @@ export default function Author() {
       // authors: author.authors.filter((a) => a.id !== target.id),
     });
   };
-
   return (
     <div>
       글쓴이 목록

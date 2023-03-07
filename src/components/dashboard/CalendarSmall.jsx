@@ -14,7 +14,8 @@ const currentDate = moment(current).format("YYYY-DD-MM");
 const currentDataMonth = moment(current).format("MM");
 const currenttime = moment(current).format("hh:mm:ss");
 
-export default function CalendarSmall({ setSDate }) {
+export default function CalendarSmall({}) {
+  const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
   const [workDate, setWorkDate] = useState([]);
 
   useEffect(() => {
