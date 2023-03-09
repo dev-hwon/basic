@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
+const authorsUrl = `${process.env.REACT_APP_TEST_JSONSERVER_AUTHORS}`;
 export default function AuthorList({ author, onDelete }) {
   const { id, name } = author;
   const handleDelete = () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}/${id}`, {
+      fetch(authorsUrl + `/${id}`, {
         method: "DELETE",
       })
         .then((res) => {
@@ -18,7 +18,7 @@ export default function AuthorList({ author, onDelete }) {
   };
   return (
     <li key={id}>
-      {name}-{id}
+      {name}
       <button type="button" onClick={handleDelete}>
         삭제
       </button>

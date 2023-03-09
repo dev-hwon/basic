@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState, useContext } from "react";
 import "../../circle_percentage.css";
 import moment, {
   current,
@@ -9,8 +9,6 @@ import moment, {
 } from "../../components/Current";
 import CalendarSmall from "../../components/dashboard/CalendarSmall";
 // import CalendarTimeline from "../../components/dashboard/CalendarTimeline";
-import TodoIndex from "../todos/TodoIndex";
-import TodosHeader from "../../components/todos/TodosHeader";
 import TodoAchievementChart from "../../components/todos/TodoAchievementChart";
 import {
   Box,
@@ -24,6 +22,8 @@ import {
 } from "./Layout";
 import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
+import TodoIndex from "../todos/TodoIndex";
+// import TodosHeader from "../../components/todos/TodosHeader";
 import Addtodo from "../../components/todos/Addtodo";
 
 // const filters = ["all", "active", "completed"];
@@ -81,7 +81,7 @@ export default function Main() {
           <ModalOpenBtn
             modalWidth="500px"
             className=""
-            children={<Addtodo modalProps={setModalProps} />}
+            // children={<Addtodo modalProps={setModalProps} />}
             buttonName="버튼2"
             modalProps={setModalProps}
           />
@@ -94,7 +94,9 @@ export default function Main() {
           </Box>
         </GridCol>
         <GridCol>
-          <Box>{/* <TodoIndex filter={"category2"} /> */}</Box>
+          <Box>
+            <TodoIndex filter={"category2"} />
+          </Box>
         </GridCol>
         <GridCol>
           <Box>{/* <TodoIndex filter={"category3"} /> */}</Box>

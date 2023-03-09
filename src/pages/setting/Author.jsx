@@ -1,54 +1,40 @@
 import React, { useState, useEffect, useReducer } from "react";
+import { useContext } from "react";
 import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
-import AuthorReducer from "../../components/setting/AuthorReducer";
+import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 
-const initialAuthor = {
-  loading: true,
-  errorMessage: "",
-  authors: [],
-};
 export default function Author() {
-  const [author, dispatch] = useReducer(AuthorReducer, initialAuthor);
-  const { loading, errorMessage, authors } = author;
+  const authorsList = useContext(DatasContext);
+  const authorsDispatch = useContext(DatasDispatchContext);
+  const { loading, errorMessage, authors } = authorsList;
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`)
-      .then((res) => res.json())
-      .then((res) => {
-        let data = res;
-        let dataReverse = data.reverse();
-        dispatch({ type: "AUTHOR_SUCCESS", dataReverse });
-      })
-      .catch(() => {
-        dispatch({ type: "AUTHOR_ERROR" });
-      });
-  }, []);
+  const reverseData = [...authors].reverse();
+  console.log(reverseData);
 
   const handleAdd = (addTarget) => {
-    dispatch({
-      type: "AUTHOR_ADD",
+    authorsDispatch({
+      type: "AUTHORS_UPDATE",
       addTarget,
     });
   };
 
   const handleDelete = (deleteTarget) => {
-    dispatch({
-      type: "AUTHOR_DELETE",
-      ...author,
+    authorsDispatch({
+      type: "AUTHORS_DELETE",
+      authors,
       deleteTarget,
-      // authors: author.authors.filter((a) => a.id !== target.id),
     });
   };
   return (
     <div>
       글쓴이 목록
-      <AddAuthor author={author} onAdd={handleAdd}></AddAuthor>
+      <AddAuthor authors={authors} onAdd={handleAdd}></AddAuthor>
       {loading ? (
         "loading.."
       ) : (
         <ul>
-          {authors.map((a) => (
+          {reverseData.map((a) => (
             <AuthorList
               key={a.id}
               author={a}

@@ -1,7 +1,6 @@
-{
-  "sample" : [
+{"sample": [
     {
-      "id" : "todos",
+      "id": "todos",
       "todos": [
         {
           "id": "1",
@@ -61,23 +60,11 @@
           "completeTime": null,
           "fileList": null,
           "confirm": null
-        },
-        {
-          "id": "0d972c70-158f-4bde-802f-7659e6de93fc",
-          "category": "category1",
-          "todosStatus": "active",
-          "todosName": "a1",
-          "todosDate": "2023-03-07",
-          "completeDate": null,
-          "completeTime": null,
-          "fileList": null,
-          "confirm": null,
-          "reple": null,
-          "repleCount": null
         }
       ]
-    }, {
-      "id" : "authors",
+    },
+    {
+      "id": "authors",
       "authors": [
         {
           "id": "96092973-53fb-4e81-86d6-f902e811567b",
@@ -92,8 +79,9 @@
           "name": "a3"
         }
       ]
-    }, {
-      "id" : "categorys",
+    },
+    {
+      "id": "categorys",
       "categorys": [
         {
           "id": "category1",
@@ -125,8 +113,4 @@
         }
       ]
     }
-  ]
-  
-  
-  
-}
+  ]}

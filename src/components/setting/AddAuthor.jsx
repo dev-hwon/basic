@@ -1,9 +1,8 @@
 import React, { useCallback, useReducer, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import AuthorReducer from "./AuthorReducer";
 //https://velog.io/@hwang-eunji/React-Hooks-5-useReducer
-export default function AddAuthor({ onAdd, author }) {
-  const { authors } = author;
+const authorsUrl = `${process.env.REACT_APP_TEST_JSONSERVER_AUTHORS}`;
+export default function AddAuthor({ onAdd, authors }) {
   const [name, setName] = useState("");
   const handleChange = (e) => {
     setName(e.target.value);
@@ -23,7 +22,7 @@ export default function AddAuthor({ onAdd, author }) {
     }
     // 추가
     const randomID = uuidv4();
-    fetch(`${process.env.REACT_APP_TEST_JSONSERVER_AUTHOR}`, {
+    fetch(authorsUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useContext } from "react";
 import "../../circle_percentage.css";
 import styled from "styled-components";
 // import Moment from "react-moment";
@@ -7,22 +7,21 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarSmall.css";
 import { GridCol, GridWrap } from "../../pages/layouts/Layout";
-import useFetch from "../../hooks/useFetch";
+import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 
-const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
-const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
-
-const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+const sampleJSON = `${process.env.REACT_APP_TEST_JSONSERVER_SAMPLE}`;
 const current = new Date();
 const currentDate = moment(current).format("YYYY-DD-MM");
 const currentDataMonth = moment(current).format("MM");
 const currenttime = moment(current).format("hh:mm:ss");
 
 export default function CalendarSmall({}) {
+  const todosList = useContext(DatasContext);
+  const todosDispatch = useContext(DatasDispatchContext);
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
-  const [workDate, setWorkDate] = useState([]);
 
-  const { loading, errorMessage, todos } = useFetch(todosyUrl, "todos");
+  // 데이터 가져오기
+  const { todos } = todosList;
 
   // 이번달 시작일
   const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");

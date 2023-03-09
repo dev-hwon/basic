@@ -1,13 +1,16 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import TodosReducer from "../../hooks/TodosReducer";
-import useFetch from "../../hooks/useFetch";
+import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 import { current, currentDate } from "../Current";
-const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
-const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
+const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 export default function Addtodo({ modalProps }) {
+  const todosList = useContext(DatasContext);
+  const todosDispatch = useContext(DatasDispatchContext);
+
   const [targetCategory, setTargetCategory] = useState("");
   const [updateData, setUpdateData] = useState({
     todosName: "",
@@ -19,7 +22,8 @@ export default function Addtodo({ modalProps }) {
     repleCount: null,
   });
 
-  const datas = useFetch(todosyUrl, "todos");
+  // 데이터 가져오기
+  const { categorys } = todosList;
 
   const handleChangeTodosName = (e) => {
     setUpdateData({ ...updateData, todosName: e.target.value });
@@ -44,17 +48,16 @@ export default function Addtodo({ modalProps }) {
       todosDate: currentDate,
       ...updateData,
     };
-
-    fetch(todosyUrl, {
+    fetch(todosUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json; charset=utf-8",
       },
       body: JSON.stringify(adjData),
     })
       .then((response) => response.json())
       .then(() => {
-        TodosReducer(datas, { type: "TODOS_UPDATE", adjData });
+        todosDispatch({ type: "TODOS_UPDATE", adjData });
       });
 
     setUpdateData({ ...updateData, todosName: "" });
@@ -63,7 +66,10 @@ export default function Addtodo({ modalProps }) {
 
   return (
     <form onSubmit={handleSubmit} action="/">
-      <CategoryList selectedCategory={setTargetCategory} />
+      <CategoryList
+        categorys={categorys}
+        selectedCategory={setTargetCategory}
+      />
       <input
         type="text"
         placeholder="dddd"
@@ -75,36 +81,25 @@ export default function Addtodo({ modalProps }) {
   );
 }
 
-function CategoryList({ selectedCategory }) {
+function CategoryList({ categorys, selectedCategory }) {
   const [active, setActive] = useState("");
-  const { loading, errorMessage, categorys } = useFetch(
-    categoryUrl,
-    "categorys"
-  );
   const handleClick = (e) => {
     selectedCategory(e.target.value);
     setActive(e.target.value);
   };
   return (
-    <>
-      {loading ? (
-        "loading.."
-      ) : (
-        <div className="">
-          {categorys.map((dd) => (
-            <button
-              type="button"
-              key={dd.id}
-              value={dd.id}
-              className={dd.id === active ? "active" : ""}
-              onClick={handleClick}
-            >
-              {dd.name}
-            </button>
-          ))}
-        </div>
-      )}
-      {errorMessage ? errorMessage : null}
-    </>
+    <div className="">
+      {categorys.map((dd) => (
+        <button
+          type="button"
+          key={dd.id}
+          value={dd.id}
+          className={dd.id === active ? "active" : ""}
+          onClick={handleClick}
+        >
+          {dd.name}
+        </button>
+      ))}
+    </div>
   );
 }

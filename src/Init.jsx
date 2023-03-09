@@ -9,6 +9,7 @@ import EmptyPage from "./pages/EmptyPage";
 import BoardIndex from "./pages/board/BoardIndex";
 import SettingIndex from "./pages/setting/SettingIndex";
 import FileIndex from "./pages/file/FileIndex";
+import { GlobalContextProvider } from "./context/Golbal";
 const router = createBrowserRouter([
   {
     path: "/",
