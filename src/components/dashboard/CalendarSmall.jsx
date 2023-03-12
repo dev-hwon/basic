@@ -16,12 +16,12 @@ const currentDataMonth = moment(current).format("MM");
 const currenttime = moment(current).format("hh:mm:ss");
 
 export default function CalendarSmall({}) {
-  const todosList = useContext(DatasContext);
+  const dataList = useContext(DatasContext);
   const todosDispatch = useContext(DatasDispatchContext);
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
 
   // 데이터 가져오기
-  const { todos } = todosList;
+  const { todos } = dataList;
 
   // 이번달 시작일
   const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");

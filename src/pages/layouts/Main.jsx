@@ -3,7 +3,7 @@ import "../../circle_percentage.css";
 import moment, {
   current,
   currentDate,
-  currenttime,
+  Currenttime,
   dayWork,
   getData,
 } from "../../components/Current";
@@ -23,8 +23,8 @@ import {
 import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import TodoIndex from "../todos/TodoIndex";
-// import TodosHeader from "../../components/todos/TodosHeader";
 import Addtodo from "../../components/todos/Addtodo";
+import TodosCategorySet from "../../components/todos/TodosCategorySet";
 
 // const filters = ["all", "active", "completed"];
 export default function Main() {
@@ -37,6 +37,7 @@ export default function Main() {
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
+      <Currenttime></Currenttime>
       <GridTitle>제목1</GridTitle>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
@@ -81,8 +82,8 @@ export default function Main() {
           <ModalOpenBtn
             modalWidth="500px"
             className=""
-            // children={<Addtodo modalProps={setModalProps} />}
-            buttonName="버튼2"
+            children={<TodosCategorySet modalProps={setModalProps} />}
+            buttonName="카테고리 설정"
             modalProps={setModalProps}
           />
         </ButtonGroup>
@@ -115,7 +116,6 @@ export default function Main() {
           <Box>
             {currentDate}
             <br />
-            {currenttime}
           </Box>
         </GridCol>
         <GridCol>

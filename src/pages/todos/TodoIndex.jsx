@@ -6,9 +6,9 @@ const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
 export default function TodoIndex({ filter }) {
-  const todosList = useContext(DatasContext);
-  const todosDispatch = useContext(DatasDispatchContext);
-  const { loading, errorMessage, todos, categorys } = todosList;
+  const dataList = useContext(DatasContext);
+  const dataDispatch = useContext(DatasDispatchContext);
+  const { loading, errorMessage, todos, categorys } = dataList;
 
   const todosfiltered = todos.filter((f) => f.category === filter);
   const categorysfiltered = categorys.filter((f) => f.id === filter);

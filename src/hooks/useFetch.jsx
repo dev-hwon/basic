@@ -1,22 +1,31 @@
 import React, { useEffect, useReducer, useState, useCallback } from "react";
 import TodosReducer from "./TodosReducer";
 
-export default function useFetch(url) {
-  const [datas, setDatas] = useState([]);
+function useFetch(url, objName) {
+  const [datas, dispatch] = useReducer(TodosReducer, {
+    loading: true,
+    errorMessage: "",
+    todos: [],
+    categorys: [],
+    authors: [],
+  });
   const getData = useCallback(
     async () => await fetch(url).then((res) => res.json())
   );
   useEffect(() => {
     getData()
       .then((res) => {
-        setDatas(res);
+        const data = res;
+        dispatch({ type: "TODOS_SUCCESS", data, objName });
       })
       .catch(() => {
-        console.log("error!!!");
+        dispatch({ type: "TODOS_ERROR" });
       });
   }, []);
   return datas;
 }
+
+export default useFetch;
 
 // import { useEffect, useState } from "react";
 

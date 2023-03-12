@@ -63,13 +63,21 @@ function dataReducer(state, action) {
         datas: [],
       };
     }
-    case "TODOS_UPDATE": {
+    case "TODOS_ADD": {
       console.log(state);
       const { adjData } = action;
-      // const ddd = state.map((d) => d.id === "todos")
       return {
         ...state,
         todos: [...state.todos, adjData],
+      };
+    }
+    // 반복업무 자동일감생성...인데 나중에 작업예정..
+    case "TODOS_ADD_REPEAT": {
+      console.log(state);
+      const { id, todosDate } = action;
+      return {
+        ...state,
+        todos: [...state.todos, id, todosDate],
       };
     }
     case "TODOS_DELETE": {
@@ -77,6 +85,16 @@ function dataReducer(state, action) {
         loading: false,
         errorMessage: "",
         categorys: "",
+      };
+    }
+    case "CATEGORYS_UPDATE": {
+      const { id, name, color } = action;
+      // const ddd = state.map((d) => d.id === "todos")
+      return {
+        ...state,
+        categorys: state.categorys.map((list) =>
+          list.id === id ? { ...list, name, color } : list
+        ),
       };
     }
     case "AUTHORS_UPDATE": {
@@ -138,7 +156,6 @@ export function GlobalContextProvider({ children }) {
         dataDispatch({ type: "ERROR" });
       });
   }, []);
-
   // 로딩중.. 추후 부분적으로 적용예정 일단 전체에 걸어버림
   const { loading, errorMessage, datas } = data;
 

@@ -442,8 +442,13 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 }
 .common_btn.btn_submit{
     color: #fff;
-    border: 1px solid #3882b3;
-    background: #3882b3;
+    border: 1px solid #3588F3;
+    background: #3588F3;
+}
+.common_btn.btn_cancel{
+    color: #666;
+    border: 1px solid transparent;
+    background: #fff;
 }
 .common_btn.btn_white{
     color: #666;

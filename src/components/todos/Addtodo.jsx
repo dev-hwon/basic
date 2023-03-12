@@ -3,17 +3,26 @@ import { useContext } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
+import TodosReducer from "../../hooks/TodosReducer";
+import useFetch from "../../hooks/useFetch";
 import { current, currentDate } from "../Current";
-
-const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
+import {
+  ModalTitle,
+  ModalSummary,
+  ButtonWrapper,
+  ConfirmButton,
+  CancelButton,
+} from "../modal/ModalStyle";
+const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
-export default function Addtodo({ modalProps }) {
-  const todosList = useContext(DatasContext);
-  const todosDispatch = useContext(DatasDispatchContext);
 
+export default function Addtodo({ modalProps }) {
+  const dataList = useContext(DatasContext);
+  const dataDispatch = useContext(DatasDispatchContext);
   const [targetCategory, setTargetCategory] = useState("");
   const [updateData, setUpdateData] = useState({
     todosName: "",
+    isRepeat: false,
     completeDate: null,
     completeTime: null,
     fileList: null,
@@ -22,11 +31,15 @@ export default function Addtodo({ modalProps }) {
     repleCount: null,
   });
 
-  // 데이터 가져오기
-  const { categorys } = todosList;
-
   const handleChangeTodosName = (e) => {
     setUpdateData({ ...updateData, todosName: e.target.value });
+  };
+  const handleChangeTodosRepeat = (e) => {
+    if (e.target.checked) {
+      setUpdateData({ ...updateData, isRepeat: true });
+    } else {
+      setUpdateData({ ...updateData, isRepeat: false });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -45,61 +58,95 @@ export default function Addtodo({ modalProps }) {
       category: targetCategory,
       todosStatus: "active",
       todosName: updateData.todosName,
+      isRepeat: updateData.isRepeat,
       todosDate: currentDate,
       ...updateData,
     };
-    fetch(todosUrl, {
+
+    fetch(todosyUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(adjData),
     })
       .then((response) => response.json())
       .then(() => {
-        todosDispatch({ type: "TODOS_UPDATE", adjData });
+        dataDispatch({ type: "TODOS_ADD", adjData });
       });
 
     setUpdateData({ ...updateData, todosName: "" });
     modalProps({ visible: false });
   };
+  console.log(updateData);
 
   return (
-    <form onSubmit={handleSubmit} action="/">
-      <CategoryList
-        categorys={categorys}
-        selectedCategory={setTargetCategory}
-      />
-      <input
-        type="text"
-        placeholder="dddd"
-        value={updateData.todosName}
-        onChange={handleChangeTodosName}
-      />
-      <button>Add</button>
-    </form>
+    <>
+      <ModalTitle>일감 추가</ModalTitle>
+      <ModalSummary>서머리</ModalSummary>
+      <form onSubmit={handleSubmit} action="/">
+        <CategoryList selectedCategory={setTargetCategory} />
+        <input
+          type="text"
+          placeholder="dddd"
+          value={updateData.todosName}
+          onChange={handleChangeTodosName}
+        />
+        <input
+          type="checkbox"
+          placeholder="dddd"
+          value={updateData.todosName}
+          onChange={handleChangeTodosRepeat}
+        />
+        <ButtonWrapper align="right">
+          <CancelButton className="common_btn btn_sm btn_cancel">
+            취소
+          </CancelButton>
+          <ConfirmButton type="submit" className="common_btn btn_sm btn_submit">
+            추가
+          </ConfirmButton>
+        </ButtonWrapper>
+      </form>
+    </>
   );
 }
 
-function CategoryList({ categorys, selectedCategory }) {
-  const [active, setActive] = useState("");
-  const handleClick = (e) => {
+function CategoryList({ selectedCategory }) {
+  const dataList = useContext(DatasContext);
+  const dataDispatch = useContext(DatasDispatchContext);
+  const handleChangeSelectedCategory = (e) => {
     selectedCategory(e.target.value);
-    setActive(e.target.value);
   };
+
+  const { categorys } = dataList;
+
   return (
-    <div className="">
-      {categorys.map((dd) => (
-        <button
-          type="button"
-          key={dd.id}
-          value={dd.id}
-          className={dd.id === active ? "active" : ""}
-          onClick={handleClick}
-        >
-          {dd.name}
-        </button>
-      ))}
-    </div>
+    <>
+      <div className="">
+        {categorys.map((cate, idx) => (
+          <label key={idx}>
+            <input
+              type="radio"
+              name="categoryName"
+              value={cate.id}
+              onChange={handleChangeSelectedCategory}
+            />
+            {cate.name}
+          </label>
+        ))}
+
+        {/* {categorys.map((dd) => (
+          <button
+            type="button"
+            key={dd.id}
+            value={dd.id}
+            className={dd.id === active ? "active" : ""}
+            onClick={handleClick}
+          >
+            {dd.name}
+          </button>
+        ))} */}
+      </div>
+    </>
   );
 }

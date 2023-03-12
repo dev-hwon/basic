@@ -6,6 +6,7 @@
       "todosName": "할일1",
       "todosStatus": "active",
       "todosDate": "2023-03-06",
+      "isRepeat": true,
       "completeDate": null,
       "completeTime": null,
       "fileList": null,
@@ -58,19 +59,6 @@
       "completeTime": null,
       "fileList": null,
       "confirm": null
-    },
-    {
-      "id": "0d972c70-158f-4bde-802f-7659e6de93fc",
-      "category": "category1",
-      "todosStatus": "active",
-      "todosName": "a1",
-      "todosDate": "2023-03-07",
-      "completeDate": null,
-      "completeTime": null,
-      "fileList": null,
-      "confirm": null,
-      "reple": null,
-      "repleCount": null
     }
   ],
   "authors": [
@@ -90,29 +78,29 @@
   "categorys": [
     {
       "id": "category1",
-      "name": "진료전",
-      "color": "#0d6efd",
+      "name": "ㅁㄴㅀㅁㄴㅀ",
+      "color": "#F65555",
       "startTime": "09:00",
       "endtTime": "10:30"
     },
     {
       "id": "category2",
       "name": "진료중",
-      "color": "#dc3545",
+      "color": "#FE8947",
       "startTime": "10:30",
       "endtTime": "16:00"
     },
     {
       "id": "category3",
       "name": "진료마감",
-      "color": "#fd7e14",
+      "color": "#00AF5B",
       "startTime": "16:00",
       "endtTime": "17:30"
     },
     {
       "id": "category4",
       "name": "기타",
-      "color": "#6c757d",
+      "color": "#1868FB",
       "startTime": "17:30",
       "endtTime": "18:30"
     }

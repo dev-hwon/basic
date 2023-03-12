@@ -18,7 +18,6 @@ export default function TodosReducer(todo, action) {
       };
     }
     case "TODOS_UPDATE": {
-      console.log("ddd1234");
       const { adjData } = action;
       return {
         ...todo,
