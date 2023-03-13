@@ -35,6 +35,13 @@ export default function GlobalLnb({ fold, onoff }) {
               <Link to={"/board"}>보드</Link>
             </li>
             <li>
+              <Link to={"/board/manual"}>우리 병원 매뉴얼</Link>
+              <br />
+              <Link to={"/board/notice"}>공지사항</Link>
+              <br />
+              <Link to={"/board/free"}>자유게시판</Link>
+            </li>
+            <li>
               <Link to={"/setting"}>setting</Link>
             </li>
           </ul>

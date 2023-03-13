@@ -1,9 +1,9 @@
-import { useCallback, useEffect } from "react";
-import { createContext, useReducer } from "react";
+import { useCallback, useEffect, createContext, useReducer } from "react";
 const sampleJSON = `${process.env.REACT_APP_TEST_JSONSERVER_SAMPLE}`;
 const todosUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categorysUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 const authorsUrl = `${process.env.REACT_APP_TEST_JSONSERVER_AUTHORS}`;
+const boardlistsUrl = `${process.env.REACT_APP_TEST_JSONSERVER_BOARDLISTS}`;
 const initialTheme = "dark";
 const initialUser = { name: "Guest" };
 const initialData = {
@@ -12,6 +12,7 @@ const initialData = {
   todos: [],
   categorys: [],
   authors: [],
+  boardlists: [],
 };
 
 export const ThemeContext = createContext();
@@ -48,13 +49,14 @@ function userReducer(state, action) {
 function dataReducer(state, action) {
   switch (action.type) {
     case "SUCCESS":
-      const { todosData, categorysData, authorsData } = action;
+      const { todosData, categorysData, authorsData, boardlistsData } = action;
       return {
         loading: false,
         errorMessage: "",
         todos: todosData ? todosData : [...state.todos],
         categorys: categorysData ? categorysData : [...state.categorys],
         authors: authorsData ? authorsData : [...state.authors],
+        boardlists: boardlistsData ? boardlistsData : [...state.boardlists],
       };
     case "ERROR": {
       return {
@@ -64,7 +66,6 @@ function dataReducer(state, action) {
       };
     }
     case "TODOS_ADD": {
-      console.log(state);
       const { adjData } = action;
       return {
         ...state,
@@ -73,7 +74,6 @@ function dataReducer(state, action) {
     }
     // 반복업무 자동일감생성...인데 나중에 작업예정..
     case "TODOS_ADD_REPEAT": {
-      console.log(state);
       const { id, todosDate } = action;
       return {
         ...state,
@@ -156,6 +156,7 @@ export function GlobalContextProvider({ children }) {
         dataDispatch({ type: "ERROR" });
       });
   }, []);
+
   // 로딩중.. 추후 부분적으로 적용예정 일단 전체에 걸어버림
   const { loading, errorMessage, datas } = data;
 

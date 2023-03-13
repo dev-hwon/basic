@@ -4,7 +4,6 @@ import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Index from "./pages/Index";
 import Main from "./pages/layouts/Main";
-import BoardList from "./pages/board/BoardList";
 import EmptyPage from "./pages/EmptyPage";
 import BoardIndex from "./pages/board/BoardIndex";
 import SettingIndex from "./pages/setting/SettingIndex";
@@ -21,7 +20,8 @@ const router = createBrowserRouter([
       { path: "/layout/main", element: <Main /> },
       { path: "/file", element: <FileIndex /> },
       { path: "/board", element: <BoardIndex /> },
-      { path: "/board/:boardNname", element: <BoardList /> },
+      { path: "/board/:boardName", element: <BoardIndex /> },
+      { path: "/board/:boardName/:id", element: <BoardIndex /> },
       { path: "/setting", element: <SettingIndex /> },
     ],
   },

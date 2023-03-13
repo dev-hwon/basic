@@ -17,7 +17,6 @@ const currenttime = moment(current).format("hh:mm:ss");
 
 export default function CalendarSmall({}) {
   const dataList = useContext(DatasContext);
-  const todosDispatch = useContext(DatasDispatchContext);
   const [sDate, setSDate] = useState(moment(current).format("YYYY-MM-DD"));
 
   // 데이터 가져오기
