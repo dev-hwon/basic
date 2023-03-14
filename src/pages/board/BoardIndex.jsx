@@ -2,8 +2,8 @@ import { useCallback, useEffect, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
-import BoardLists from "./BoardLists";
-import BoardWrite from "./BoardWrite";
+import BoardLists from "../../components/board/BoardLists";
+import BoardWrite from "../../components/board/BoardWrite";
 const boardlistsUrl = `${process.env.REACT_APP_TEST_JSONSERVER_BOARDLISTS}`;
 const boardNameKR = {
   manual: "우리 병원 매뉴얼",
