@@ -1,10 +1,7 @@
 import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
-import TodosReducer from "../../hooks/TodosReducer";
-import useFetch from "../../hooks/useFetch";
 import { current, currentDate } from "../Current";
 import {
   ModalTitle,
@@ -12,7 +9,7 @@ import {
   ButtonWrapper,
   ConfirmButton,
   CancelButton,
-} from "../modal/ModalStyle";
+} from "../Style";
 const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
@@ -84,7 +81,7 @@ export default function Addtodo({ modalProps }) {
     <>
       <ModalTitle>일감 추가</ModalTitle>
       <ModalSummary>서머리</ModalSummary>
-      <form onSubmit={handleSubmit} action="/">
+      <form onSubmit={handleSubmit}>
         <CategoryList selectedCategory={setTargetCategory} />
         <input
           type="text"

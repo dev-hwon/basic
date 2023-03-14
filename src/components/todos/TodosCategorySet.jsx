@@ -7,7 +7,7 @@ import {
   ButtonWrapper,
   ConfirmButton,
   CancelButton,
-} from "../modal/ModalStyle";
+} from "../Style";
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 const colorList = [
   "#F65555",

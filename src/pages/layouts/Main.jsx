@@ -19,7 +19,7 @@ import {
   GridCol,
   GridWrap,
   ButtonGroup,
-} from "./Layout";
+} from "../../components/Style";
 import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import TodoIndex from "../todos/TodoIndex";

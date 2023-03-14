@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { GridCol, GridWrap } from "./Layout";
+import { GridCol, GridWrap } from "../../components/Style";
 export default function Header({ fold, isActive, postItActive }) {
   const handleClick = () => {
     postItActive((prev) => (prev = !prev));

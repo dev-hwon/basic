@@ -1,5 +1,5 @@
 import React from "react";
-import { GridCol, GridWrap } from "../layouts/Layout";
+import { GridCol, GridWrap } from "../../components/Style";
 import { data } from "./ReviewDb";
 
 export default function Reviews() {

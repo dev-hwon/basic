@@ -6,7 +6,7 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarSmall.css";
-import { GridCol, GridWrap } from "../../pages/layouts/Layout";
+import { GridCol, GridWrap } from "../Style";
 import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 
 const sampleJSON = `${process.env.REACT_APP_TEST_JSONSERVER_SAMPLE}`;

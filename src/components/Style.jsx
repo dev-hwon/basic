@@ -1,4 +1,78 @@
 import styled, { keyframes, css } from "styled-components";
+export const GridTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+`;
+export const TitleText = styled.div`
+  font-size: inherit;
+  font-weight: inherit;
+`;
+export const GridWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  ${(props) =>
+    props.colWidth &&
+    css`
+      > div {
+        width: ${props.colWidth}${props.colWidthUnit ? props.colWidthUnit : ""};
+      }
+    `}
+  ${(props) =>
+    props.colHeight &&
+    css`
+      height: ${props.colHeight}${props.colHeightUnit ? props.colHeightUnit : ""};
+    `}
+  ${(props) =>
+    props.colGap &&
+    css`
+      margin: 0 ${props.colGap * -0.5}px;
+      > div {
+        padding: 0 ${props.colGap * 0.5}px;
+        margin-bottom: ${props.colNomargin
+          ? props.colNomargin
+          : props.colGap}px;
+      }
+    `}
+  ${(props) =>
+    props.colAlign &&
+    css`
+      justify-content: ${props.colAlign};
+    `}
+  ${(props) =>
+    props.colVerticalAlign &&
+    css`
+      align-items: ${props.colVerticalAlign};
+    `}
+`;
+
+export const GridCol = styled.div`
+  flex: 0 0 auto;
+`;
+export const Box = styled.div`
+  background-color: #fff;
+  height: 100%;
+  min-height: 20px;
+  border-radius: 12px;
+`;
+export const BoxHead = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+`;
+export const BoxFoot = styled.div`
+  font-size: 12px;
+  color: #888;
+`;
+export const BoxCont = styled.div`
+  font-size: 13px;
+  color: #333;
+`;
+export const ButtonGroup = styled.div`
+  display: flex;
+`;
+
 export const modalShow = keyframes`
 from {
   opacity: 0;
@@ -135,6 +209,7 @@ export const ModalSummary = styled.div`
 `;
 export const ButtonWrapper = styled.div`
   text-align: ${(props) => (props.align ? props.align : "left")};
+  margin: ${(props) => (props.margin ? props.margin : "0")};
 `;
 export const CancelButton = styled.button`
   width: 96px;
@@ -145,39 +220,44 @@ export const ConfirmButton = styled.button`
   border-radius: 32px;
 `;
 // default table
-export const Table = styled.button`
+export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   border-top: 1px solid #e1e1e1;
+  text-algin: left;
 `;
-export const TableHeader = styled.button`
-  > tr > th {
+export const TableHeader = styled.thead`
+  > tr > th,
+  > tr > td {
     padding: 8px;
-    border: 1px solid #e0e0e0;
-    font-size: 16px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
     font-weight: bold;
     background: #f5f5f5;
     color: #666;
-    text-align: center;
   }
 `;
-export const TableBody = styled.button`
+export const TableBody = styled.tbody`
   > tr > th,
   > tr > td {
-    padding: 24px 22px;
     border-bottom: 1px solid #e1e1e1;
-    vertical-align: middle;
+    padding: ${(props) => (props.padding ? props.padding : "10px")};
+    vertical-align: ${(props) => (props.vertical ? props.vertical : "center")};
+    text-align: ${(props) => (props.align ? props.align : "left")};
+  }
+  > tr > td.cell_head {
+    background-color: #f7f7f8;
   }
   > tr > th {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     background: #f5f5f5;
     color: #666;
     text-align: left;
   }
   > tr > td {
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
   }
 `;

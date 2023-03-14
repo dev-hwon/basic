@@ -39,7 +39,7 @@ export default function BoardIndex() {
       <div className="">
         {boardNameKR[param.boardName]}
         <ModalOpenBtn
-          modalWidth="400px"
+          modalWidth="800px"
           className=""
           children={<BoardWrite modalProps={setModalProps} />}
           buttonName="글쓰기"

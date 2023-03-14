@@ -33,7 +33,7 @@
     --form-md:40px;
     --form-sm:36px;
     --form-xs:32px;
-    --theme-bg1 : #eee;
+    --theme-bg1 : #2B2D30;
     --theme-bg2 : #F5F5F5;
     --theme-fontcolor : #333; 
     --theme-shadow : 3px 3px 6px rgba(0,0,0,.2), -3px -3px 6px rgba(0,0,0,.2);
@@ -478,7 +478,7 @@ form {}
 input[type=text],
 input[type=password],
 input[type=number],
-select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: #333; padding: 0 8px; }
+select { width: 100%; height: 32px; font-size: var(--font-sm); color: #333; padding: 0 8px; border:none; outline: none; }
 
 .form_row { margin-bottom: 10px; }
 /* ----------------------------------------------------------------
@@ -497,7 +497,7 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
     @공통_글로벌레이아웃
 -----------------------------------------------------------------*/
 .global_wrap { --global-lnb-width: 250px; --postIt-width: 250px; background-color: var(--theme-bg2); color: var(--theme-fontcolor); overflow: hidden; }
-.global_wrap.lnb_fold { --global-lnb-width: 88px }
+.global_wrap.lnb_fold { --global-lnb-width: 80px }
 
 .global_wrap > div { flex:0 0 auto; } 
 .global_wrap .global_lnb { position: fixed; top: 0; left: 0; width: var(--global-lnb-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transition: width .4s; z-index: 100; padding:16px; overflow-y: auto; overflow-x: hidden;}
@@ -531,29 +531,34 @@ select { width: 100%; height: var(--form-sm); font-size: var(--font-sm); color: 
 -----------------------------------------------------------------*/
 .tabContent > div {display: none; font-size: 20px; padding:20px;}
 .tabContent > div.active {display: block;}
+
+
+/* ----------------------------------------------------------------
+    @공통_lnb
+-----------------------------------------------------------------*/
+.global_lnb .main_logo {height: 60px; background-color: #404249; transition: height .4s, width .4s; }
+.global_lnb .main_logo > a { display: block; }
+.global_lnb nav { margin-top:24px;}
+.global_lnb nav ul {}
+.global_lnb nav ul li { margin-bottom:10px;}
+.global_lnb nav ul li a {display: block; padding: 12px 16px; border-radius: 8px; transition: all .4s}
+.global_lnb nav ul li a.active { background-color: #25AAE1!important;}
+.global_lnb nav ul li a:hover { background-color: #404249;}
+.global_lnb nav ul li a img {display: inline-block; vertical-align: middle;}
+.global_lnb nav ul li a .menu_name { display: inline-block; vertical-align: middle; font-size: 14px; color:#fff; margin-left:16px;}
+
+.global_wrap.lnb_fold .global_lnb .main_logo { height:0; }
+.global_wrap.lnb_fold .global_lnb:hover .main_logo { height:60px;}
+
+.global_wrap.lnb_fold .global_lnb nav ul li a { padding: 12px; }
+
+.global_wrap.lnb_fold .global_lnb nav ul li a .menu_name { display: none;}
+.global_wrap.lnb_fold .global_lnb:hover nav ul li a .menu_name { display: inline-block;}
+
+
 /* ----------------------------------------------------------------
                        테스트용 css
 -----------------------------------------------------------------*/
 
 footer { position:sticky; top:0; left:0; background-color: #ccc; display: flex; height:60px; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;} 
-button {outline: none; box-shadow: none!important; border:1px solid #333; border-radius: 2px; font-size: 12px; padding:0 4px; min-height: 20px;}
-button.active,
-button.fold { background-color: #0d6efd; border-color:#0d6efd; color:#fff;} 
-
-.highlight {
-background: #f3a95f!important;
-}
-
-
-
-
-.container { padding:40px 46px; margin:0; }
-.nav_menu { padding:20px; }
-.nav_menu ul li { margin-bottom:20px; }
-
-.btn_lnb_controll {  background-color: #000;  }
-
-.col_custom { min-width:258px;}
-.col_auto { flex: 1 1 auto!important;}
-
 

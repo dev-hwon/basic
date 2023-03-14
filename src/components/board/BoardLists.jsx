@@ -6,19 +6,19 @@ import {
   useContext,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { Table, TableBody, TableHeader } from "../Style";
 
 function List({ boardlists, param }) {
   const navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/board/${param.boardName}/${id}`, { replace: true });
   };
-  console.log(param.id);
   return (
-    <tbody>
+    <TableBody>
       {boardlists.map(
         (list, idx) =>
           list.type === param.boardName && (
-            <tr key={idx} onClick={() => handleClick(list.id)}>
+            <tr key={list.id} onClick={() => handleClick(list.id)}>
               <td>{idx}</td>
               <td>{list.subject}</td>
               <td>{list.author}</td>
@@ -27,15 +27,15 @@ function List({ boardlists, param }) {
             </tr>
           )
       )}
-    </tbody>
+    </TableBody>
   );
 }
 
 export default function BoardLists({ boardlists, param }) {
   return (
     <>
-      <table>
-        <thead>
+      <Table>
+        <TableHeader>
           <tr>
             <td>번호</td>
             <td>제목</td>
@@ -43,10 +43,10 @@ export default function BoardLists({ boardlists, param }) {
             <td>작성일</td>
             <td>조회</td>
           </tr>
-        </thead>
+        </TableHeader>
 
         <List boardlists={boardlists} param={param} />
-      </table>
+      </Table>
     </>
   );
 }
