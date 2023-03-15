@@ -2,17 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { GridCol, GridWrap } from "../../components/Style";
-export default function Header({ fold, isActive, postItActive }) {
+export default function GlobalHeader({ postItActive, setPostItActive }) {
   const handleClick = () => {
-    postItActive((prev) => (prev = !prev));
+    setPostItActive((prev) => (prev = !prev));
   };
   return (
-    <CommonHeader isFold={fold}>
-      {fold && (
-        <HeaderLogo className="header_logo">
-          <Link to="/">로고</Link>
-        </HeaderLogo>
-      )}
+    <Header>
       <GridWrap colWidth={50} colWidthUnit="%">
         <GridCol className="text_left">
           <GridWrap
@@ -37,7 +32,7 @@ export default function Header({ fold, isActive, postItActive }) {
             <GridCol>
               <PostItButton
                 onClick={handleClick}
-                className={isActive ? "active" : ""}
+                className={postItActive ? "active" : ""}
               ></PostItButton>
             </GridCol>
           </GridWrap>
@@ -64,11 +59,11 @@ export default function Header({ fold, isActive, postItActive }) {
           </GridWrap>
         </GridCol>
       </GridWrap>
-    </CommonHeader>
+    </Header>
   );
 }
 
-const CommonHeader = styled.header`
+const Header = styled.header`
   position: sticky;
   top: 0;
   left: 0;
@@ -91,16 +86,6 @@ const CommonHeader = styled.header`
         align-items: center;
       }
     `};
-`;
-const HeaderLogo = styled.div`
-  flex: 0 0 auto;
-  padding: 0 40px;
-  > a {
-    display: block;
-    width: 111px;
-    height: 33px;
-    background-color: #5570f1;
-  }
 `;
 const PostItButton = styled.button`
   display: block;

@@ -39,8 +39,8 @@ export default function AddAuthor({ onAdd, authors }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" onChange={handleChange} value={name} />
+    <form onSubmit={handleSubmit} className="form_add_author">
+      <input type="text" onChange={handleChange} value={name} name="author" />
       <button type="submit">추가</button>
     </form>
   );

@@ -2,6 +2,13 @@ import React, { useState, useEffect, useReducer } from "react";
 import { useContext } from "react";
 import AddAuthor from "../../components/setting/AddAuthor";
 import AuthorList from "../../components/setting/AuthorList";
+import {
+  CommonSummary,
+  CommontitleH4,
+  GridCol,
+  GridWrap,
+  Box,
+} from "../../components/Style";
 import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 
 export default function Author() {
@@ -10,7 +17,6 @@ export default function Author() {
   const { loading, errorMessage, authors } = authorsList;
 
   const reverseData = [...authors].reverse();
-  console.log(reverseData);
 
   const handleAdd = (addTarget) => {
     authorsDispatch({
@@ -27,23 +33,32 @@ export default function Author() {
     });
   };
   return (
-    <div>
-      글쓴이 목록
-      <AddAuthor authors={authors} onAdd={handleAdd}></AddAuthor>
+    <>
+      <GridWrap colGap={16} colWidth="50%">
+        <GridCol>
+          <CommontitleH4 className="">글쓴이 목록</CommontitleH4>
+          <CommonSummary>최대 20개의 목록을 만들 수 있어요.</CommonSummary>
+        </GridCol>
+        <GridCol>
+          <Box align="right" style={{ borderRadius: "0" }}>
+            <AddAuthor authors={authors} onAdd={handleAdd}></AddAuthor>
+          </Box>
+        </GridCol>
+      </GridWrap>
       {loading ? (
         "loading.."
       ) : (
-        <ul>
+        <GridWrap colGap={16} colWidth="16.6666%">
           {reverseData.map((a) => (
-            <AuthorList
-              key={a.id}
-              author={a}
-              onDelete={handleDelete}
-            ></AuthorList>
+            <GridCol key={a.id}>
+              <Box className="authorlist" style={{ borderRadius: "0" }}>
+                <AuthorList author={a} onDelete={handleDelete} />
+              </Box>
+            </GridCol>
           ))}
-        </ul>
+        </GridWrap>
       )}
       {errorMessage ? errorMessage : null}
-    </div>
+    </>
   );
 }

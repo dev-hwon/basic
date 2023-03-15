@@ -1,12 +1,44 @@
 import styled, { keyframes, css } from "styled-components";
-export const GridTitle = styled.div`
+const size = {
+  lg: "24px;",
+  md: "20px;",
+  sm: "16px;",
+  default: "13px;",
+  xs: "12px;",
+};
+const letterSpacing = {
+  default: "auto",
+  quarter: "-0.25px",
+  half: "-0.5px",
+};
+
+export const CommontitleH1 = styled.h1`
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 16px;
+  color: #000;
 `;
-export const TitleText = styled.div`
-  font-size: inherit;
-  font-weight: inherit;
+export const CommontitleH2 = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+`;
+export const CommontitleH3 = styled.h3`
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: ${letterSpacing.half};
+`;
+export const CommontitleH4 = styled.h4`
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: ${letterSpacing.half};
+`;
+export const CommonSummary = styled.div`
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 4px;
+  letter-spacing: ${letterSpacing.quarter};
 `;
 export const GridWrap = styled.div`
   width: 100%;
@@ -53,8 +85,9 @@ export const GridCol = styled.div`
 export const Box = styled.div`
   background-color: #fff;
   height: 100%;
-  min-height: 20px;
+  min-height: 1px;
   border-radius: 12px;
+  text-align: ${(props) => (props.align ? props.align : "left")};
 `;
 export const BoxHead = styled.div`
   font-size: 16px;
@@ -68,9 +101,6 @@ export const BoxFoot = styled.div`
 export const BoxCont = styled.div`
   font-size: 13px;
   color: #333;
-`;
-export const ButtonGroup = styled.div`
-  display: flex;
 `;
 
 export const modalShow = keyframes`

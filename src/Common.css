@@ -34,7 +34,7 @@
     --form-sm:36px;
     --form-xs:32px;
     --theme-bg1 : #2B2D30;
-    --theme-bg2 : #F5F5F5;
+    --theme-bg2 : #F4F5FA;
     --theme-fontcolor : #333; 
     --theme-shadow : 3px 3px 6px rgba(0,0,0,.2), -3px -3px 6px rgba(0,0,0,.2);
     --theme-shadow-hover : 5px 5px 10px rgba(0,0,0,.4), -5px -5px 10px rgba(0,0,0,.4);
@@ -200,7 +200,7 @@ textarea:focus:-ms-input-placeholder {color:transparent;}
 /* ----------------------------------------------------------------
     @공통_container
 -----------------------------------------------------------------*/
-.container { position:relative; min-width: 1200px; min-height: calc(100vh - 120px);}
+.container { position:relative; min-width: 1200px; min-height: calc(100vh - 120px); padding:40px 32px;}
 
 /* 반응형 제거
 @media (max-width:767px){.container {width:100%}}
@@ -497,11 +497,12 @@ select { width: 100%; height: 32px; font-size: var(--font-sm); color: #333; padd
     @공통_글로벌레이아웃
 -----------------------------------------------------------------*/
 .global_wrap { --global-lnb-width: 250px; --postIt-width: 250px; background-color: var(--theme-bg2); color: var(--theme-fontcolor); overflow: hidden; }
-.global_wrap.lnb_fold { --global-lnb-width: 80px }
+.global_wrap.lnbFold { --global-lnb-width: 80px }
 
 .global_wrap > div { flex:0 0 auto; } 
 .global_wrap .global_lnb { position: fixed; top: 0; left: 0; width: var(--global-lnb-width); height:100vh; background-color: var(--theme-bg1); box-shadow: 0 0 6px 0 rgba(0,0,0,.01); transition: width .4s; z-index: 100; padding:16px; overflow-y: auto; overflow-x: hidden;}
-.global_wrap.lnb_fold .global_lnb:hover { width: 250px; transition-duration: 0s; }
+
+.global_wrap.lnbFold.lnbHover .global_lnb { width: 250px; transition-duration: 0s; }
 
 .global_wrap .layer_postIt { position: fixed; top: 0; right: 0; height: 100%; padding:15px; width:var(--postIt-width); background-color: #ccc; transform: translateX(var(--postIt-width)); transition: width .4s, transform .4s; z-index: 100; overflow: auto;}
 .global_wrap .layer_postIt.active {transform: translateX(0);}
@@ -529,31 +530,39 @@ select { width: 100%; height: 32px; font-size: var(--font-sm); color: #333; padd
 /* ----------------------------------------------------------------
     @공통_탭
 -----------------------------------------------------------------*/
-.tabContent > div {display: none; font-size: 20px; padding:20px;}
-.tabContent > div.active {display: block;}
-
+/* .tabContent > div {display: none; font-size: 20px; padding:20px;}
+.tabContent > div.active {display: block;} */
 
 /* ----------------------------------------------------------------
     @공통_lnb
 -----------------------------------------------------------------*/
-.global_lnb .main_logo {height: 60px; background-color: #404249; transition: height .4s, width .4s; }
+.global_lnb .main_logo {height: 60px; background-color: #404249; transition: height .2s, width .4s; }
 .global_lnb .main_logo > a { display: block; }
+
 .global_lnb nav { margin-top:24px;}
 .global_lnb nav ul {}
 .global_lnb nav ul li { margin-bottom:10px;}
-.global_lnb nav ul li a {display: block; padding: 12px 16px; border-radius: 8px; transition: all .4s}
+.global_lnb nav ul li a {display: block; height:48px; padding: 12px 16px; border-radius: 8px; transition: all .4s; overflow: hidden;}
 .global_lnb nav ul li a.active { background-color: #25AAE1!important;}
 .global_lnb nav ul li a:hover { background-color: #404249;}
 .global_lnb nav ul li a img {display: inline-block; vertical-align: middle;}
-.global_lnb nav ul li a .menu_name { display: inline-block; vertical-align: middle; font-size: 14px; color:#fff; margin-left:16px;}
 
-.global_wrap.lnb_fold .global_lnb .main_logo { height:0; }
-.global_wrap.lnb_fold .global_lnb:hover .main_logo { height:60px;}
+.global_lnb nav ul li a .menu_name { display: inline-block; vertical-align: middle; font-size: 14px; color:#fff; margin-left:16px;  animation: navi_text_show 1s forwards;}
+.global_wrap.lnbFold .global_lnb nav ul li a .menu_name { display: none; }
 
-.global_wrap.lnb_fold .global_lnb nav ul li a { padding: 12px; }
+.global_wrap.lnbHover nav ul li a .menu_name { display: inline-block!important; animation: navi_text_show 1s forwards;  }
 
-.global_wrap.lnb_fold .global_lnb nav ul li a .menu_name { display: none;}
-.global_wrap.lnb_fold .global_lnb:hover nav ul li a .menu_name { display: inline-block;}
+@keyframes navi_text_show {
+    0% { transform: translateX(-100%); opacity: 0; }
+    15% { opacity: 0; }
+    100% {transform: translateX(0); opacity: 1; }
+}
+
+.global_wrap.lnbFold .global_lnb .main_logo { display: none; }
+
+.global_wrap.lnbFold .global_lnb nav ul li a { padding: 12px; }
+
+
 
 
 /* ----------------------------------------------------------------

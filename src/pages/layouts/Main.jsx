@@ -14,11 +14,11 @@ import {
   Box,
   BoxHead,
   BoxCont,
-  GridTitle,
-  TitleText,
+  CommontitleH3,
+  CommonSummary,
   GridCol,
   GridWrap,
-  ButtonGroup,
+  ButtonWrapper,
 } from "../../components/Style";
 import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
@@ -38,7 +38,7 @@ export default function Main() {
     <>
       {/* {dayWork[0].title.repeat(4)} */}
       <Currenttime></Currenttime>
-      <GridTitle>제목1</GridTitle>
+      <CommontitleH3>제목1</CommontitleH3>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
@@ -69,9 +69,9 @@ export default function Main() {
         </GridCol>
       </GridWrap>
 
-      <GridTitle className="mt20">
-        <TitleText>투두리스트1</TitleText>
-        <ButtonGroup position="">
+      <CommontitleH3 className="mt20">
+        투두리스트1
+        <ButtonWrapper position="">
           <ModalOpenBtn
             modalWidth="400px"
             className=""
@@ -86,8 +86,8 @@ export default function Main() {
             buttonName="카테고리 설정"
             modalProps={setModalProps}
           />
-        </ButtonGroup>
-      </GridTitle>
+        </ButtonWrapper>
+      </CommontitleH3>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
@@ -110,7 +110,7 @@ export default function Main() {
         </GridCol>
       </GridWrap>
 
-      <GridTitle className="mt20">투두리스트2</GridTitle>
+      <CommontitleH3 className="mt20">투두리스트2</CommontitleH3>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>

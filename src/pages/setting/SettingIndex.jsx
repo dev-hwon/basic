@@ -1,47 +1,52 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { CommontitleH3, CommonSummary, Box } from "../../components/Style";
+import "./setting.css";
 import Alarm from "./Alarm";
 import Author from "./Author";
 import Guide from "./Guide";
+
+const tabinfo = [
+  { tabname: "글쓴이", tabcontent: <Author /> },
+  { tabname: "알람", tabcontent: <Alarm /> },
+  { tabname: "서비스 가이드", tabcontent: <Guide /> },
+];
+
+function Tabcontent({ tabStatus }) {
+  return <div className="tabContent">{tabinfo[tabStatus].tabcontent}</div>;
+}
+function TabMenu({ tabStatus, setTabStatus }) {
+  const handleClick = (status) => {
+    setTabStatus(status);
+  };
+  return (
+    <div className="setting_header">
+      <ul>
+        {tabinfo.map((d, idx) => (
+          <li key={idx} className={idx === tabStatus ? "active" : ""}>
+            <button onClick={() => handleClick(idx)}>{d.tabname}</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 export default function SettingIndex() {
   const [tabStatus, setTabStatus] = useState(0);
-  useEffect(() => {
-    setTabStatus(0);
-    return () => {
-      setTabStatus(0);
-    };
-  }, []);
-
+  // useEffect(() => {
+  //   setTabStatus(0);
+  //   return () => {
+  //     setTabStatus(0);
+  //   };
+  // }, []);
   return (
-    <div>
-      <div className="setting_header">
-        <div className="setting_title">
-          설정관리<small>다양한 설정을 직접 관리하세요</small>
-        </div>
-        <ul>
-          <li>
-            <button onClick={() => setTabStatus(0)}>글쓴이</button>
-          </li>
-          <li>
-            <button onClick={() => setTabStatus(1)}>알람</button>
-          </li>
-          <li>
-            <button onClick={() => setTabStatus(2)}>서비스 가이드</button>
-          </li>
-        </ul>
-      </div>
-
-      <div className="tabContent">
-        <div className={tabStatus === 0 ? "active" : ""}>
-          <Author />
-        </div>
-        <div className={tabStatus === 1 ? "active" : ""}>
-          <Alarm />
-        </div>
-        <div className={tabStatus === 2 ? "active" : ""}>
-          <Guide />
-        </div>
-      </div>
-    </div>
+    <>
+      <CommontitleH3>설정관리</CommontitleH3>
+      <CommonSummary>다양한 설정을 직접 관리해요</CommonSummary>
+      <Box style={{ borderRadius: "0", marginTop: "24px" }}>
+        <TabMenu tabStatus={tabStatus} setTabStatus={setTabStatus} />
+        <Tabcontent tabStatus={tabStatus} />
+      </Box>
+    </>
   );
 }
