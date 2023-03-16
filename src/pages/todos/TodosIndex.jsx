@@ -5,7 +5,7 @@ import { DatasContext, DatasDispatchContext } from "../../context/Golbal";
 const todosyUrl = `${process.env.REACT_APP_TEST_JSONSERVER_TODOS}`;
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 
-export default function TodoIndex({ filter }) {
+export default function TodosIndex({ filter }) {
   const dataList = useContext(DatasContext);
   const dataDispatch = useContext(DatasDispatchContext);
   const { loading, errorMessage, todos, categorys } = dataList;

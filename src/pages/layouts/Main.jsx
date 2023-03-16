@@ -9,7 +9,7 @@ import moment, {
 } from "../../components/Current";
 import CalendarSmall from "../../components/dashboard/CalendarSmall";
 // import CalendarTimeline from "../../components/dashboard/CalendarTimeline";
-import TodoAchievementChart from "../../components/todos/TodoAchievementChart";
+import TodosAchievementChart from "../../components/todos/TodosAchievementChart";
 import {
   Box,
   BoxHead,
@@ -22,7 +22,7 @@ import {
 } from "../../components/Style";
 import Reviews from "../reviews/Reviews";
 import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
-import TodoIndex from "../todos/TodoIndex";
+import TodosIndex from "../todos/TodosIndex";
 import Addtodo from "../../components/todos/Addtodo";
 import TodosCategorySet from "../../components/todos/TodosCategorySet";
 
@@ -37,13 +37,12 @@ export default function Main() {
   return (
     <>
       {/* {dayWork[0].title.repeat(4)} */}
-      <Currenttime></Currenttime>
-      <CommontitleH3>제목1</CommontitleH3>
+      <CommontitleH3>클리닉 리포트</CommontitleH3>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
             <BoxHead>오늘의 업무 완료</BoxHead>
-            <TodoAchievementChart
+            <TodosAchievementChart
               percent={75}
               trackLength={0.6}
               chartDirection={0.625}
@@ -70,7 +69,7 @@ export default function Main() {
       </GridWrap>
 
       <CommontitleH3 className="mt20">
-        투두리스트1
+        오늘의 해야 할 일<span>(124124건)</span>
         <ButtonWrapper position="">
           <ModalOpenBtn
             modalWidth="400px"
@@ -91,21 +90,21 @@ export default function Main() {
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
           <Box>
-            <TodoIndex filter={"category1"} />
+            <TodosIndex filter={"category1"} />
           </Box>
         </GridCol>
         <GridCol>
           <Box>
-            <TodoIndex filter={"category2"} />
+            <TodosIndex filter={"category2"} />
           </Box>
         </GridCol>
         <GridCol>
-          <Box>{/* <TodoIndex filter={"category3"} /> */}</Box>
+          <Box>{/* <TodosIndex filter={"category3"} /> */}</Box>
         </GridCol>
         <GridCol>
           <Box>
-            {/* <TodoIndex filter={"category4"} /> */}
-            {/* <TodoIndex filter={filter} />  */}
+            {/* <TodosIndex filter={"category4"} /> */}
+            {/* <TodosIndex filter={filter} />  */}
           </Box>
         </GridCol>
       </GridWrap>

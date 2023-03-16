@@ -88,15 +88,15 @@ export default function TodosCategorySet({ modalProps }) {
       <ModalSummary>각 영역의 카테고리를 지정해 보세요.</ModalSummary>
       <form onSubmit={handleSubmit}>
         <CategoryList className="categoryList">
-          {categorys.map((dc, idx) => (
+          {categorys.map((category, idx) => (
             <label key={idx}>
               <input
                 type="radio"
                 name="categoryName"
-                value={dc.id}
+                value={category.id}
                 onChange={handleChangeSelectedCategory}
               />
-              {dc.name}
+              <span className="category_name">{category.name}</span>
             </label>
           ))}
         </CategoryList>
@@ -105,7 +105,7 @@ export default function TodosCategorySet({ modalProps }) {
           type="text"
           placeholder={
             !!selectedCategory
-              ? selectedCategory.name
+              ? selectedCategory.name + "(최대6자)"
               : "변경할 카테고리를 선택해 주세요"
           }
           value={changeInfo.name}
@@ -127,7 +127,7 @@ export default function TodosCategorySet({ modalProps }) {
                         : false
                     }
                   />
-                  {hexCode}
+                  <span>{hexCode}</span>
                 </label>
               </li>
             ))}
@@ -152,9 +152,29 @@ export default function TodosCategorySet({ modalProps }) {
 const CategoryList = styled.div`
   display:flex;
   flex-warp:warp
-  justify-contents : flex-start;
+  justify-content: space-between;
   align-items: center;
+  margin:0 -5px;
+  > label {
+    flex:0 0 auto;
+    width:25%;
+    padding:0 5px;
+    > input {
+      appearance: none;
+      display:none;
+    }
+    > span.category_name {
+      display:block;
+      width:100%;
+      height:100%;
+      font-size: 14px;
+      color:#222;
+      border:1px solid #eee;
+      
+    }
+  }
 `;
+
 const CategoryColor = styled.div`
   margin-top:10px;
   

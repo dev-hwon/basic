@@ -7,22 +7,23 @@ export default function FileIndex() {
   const dataList = useContext(DatasContext);
   const dataDispatch = useContext(DatasDispatchContext);
   const { loading, errorMessage, categorys } = dataList;
-  const handleChangeSelectedCategory = (e) => {};
+  const handleClick = (e) => {};
 
   return (
     <div>
       <CategoryList className="categoryList">
-        {categorys.map((dc, idx) => (
-          <label key={idx}>
-            <input
-              type="radio"
-              name="categoryName"
-              value={dc.id}
-              onChange={handleChangeSelectedCategory}
-            />
-            {dc.name}
-          </label>
-        ))}
+        <ul>
+          <li>
+            <button onClick={() => handleClick("all")}>전체보기</button>
+          </li>
+          {categorys.map((category, idx) => (
+            <li key={idx}>
+              <button onClick={() => handleClick(category.id)}>
+                {category.name}
+              </button>
+            </li>
+          ))}
+        </ul>
       </CategoryList>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react";
 import { Outlet } from "react-router-dom";
 import ColorThemeProvider, { useColorTheme } from "../context/ColorTheme";
 import GlobalHeader from "./layouts/GlobalHeader";
-import Footer from "./layouts/Footer";
+import GlobalFooter from "./layouts/GlobalFooter";
 import GlobalLnb from "./layouts/GlobalLnb";
 import PostIts from "./postit/PostIts";
 import { GlobalContextProvider } from "../context/Golbal";
@@ -38,7 +38,7 @@ export default function Index() {
           <div className="container">
             <Outlet></Outlet>
           </div>
-          <Footer />
+          <GlobalFooter />
         </div>
       </div>
       <div id="modal-root"></div>

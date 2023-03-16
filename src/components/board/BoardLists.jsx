@@ -11,7 +11,7 @@ import { Table, TableBody, TableHeader } from "../Style";
 function List({ boardlists, param }) {
   const navigate = useNavigate();
   const handleClick = (id) => {
-    navigate(`/board/${param.boardName}/${id}`, { replace: true });
+    navigate(`/board/${param.boardName}/id/${id}`, { replace: true });
   };
   return (
     <TableBody>

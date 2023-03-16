@@ -1,24 +1,41 @@
 //eslint-disable
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useState } from "react";
 const url = `${process.env.REACT_APP_HOST}`;
 const menulist = [
-  { link: "/layout/main", name: "클리닉 리포트", icon: "icon_report.svg" },
-  { link: "/layout/todos", name: "할일관리", icon: "icon_todos.svg" },
-  { link: "/layout/folder", name: "업무폴더", icon: "icon_folder.svg" },
-  { link: "/file", name: "파일함", icon: "icon_cloud.svg" },
-  { link: "/setting", name: "설정관리", icon: "icon_setting.svg" },
-  { link: "/board/manual", name: "우리 병원 매뉴얼", icon: "icon_manual.svg" },
-];
-const submenulist = [
   {
+    id: "1",
+    link: "/layout/main",
+    name: "클리닉 리포트",
+    icon: "icon_report.svg",
+  },
+  { id: "2", link: "/todos", name: "할일관리", icon: "icon_todos.svg" },
+  {
+    id: "3",
+    link: "/todos",
+    name: "업무폴더",
+    icon: "icon_folder.svg",
+  },
+  { id: "4", link: "/file", name: "파일함", icon: "icon_cloud.svg" },
+  { id: "5", link: "/setting", name: "설정관리", icon: "icon_setting.svg" },
+  {
+    id: "6",
+    link: "/board/manual",
+    name: "우리 병원 매뉴얼",
+    icon: "icon_manual.svg",
+  },
+];
+const menulist2 = [
+  {
+    id: "7",
     link: "https://www.medivalue.co.kr/",
     name: "재료스토어",
     icon: "icon_store.svg",
     target: "_blank",
   },
   {
+    id: "8",
     link: "https://dt.medivalue.co.kr/",
     name: "기공플랫폼",
     icon: "icon_platform.svg",
@@ -26,48 +43,10 @@ const submenulist = [
   },
 ];
 
-const NavSubMenu = (props) => {
-  const { setLnbHover } = props;
-  const handleEnter = () => {
-    setLnbHover(true);
-  };
-  const handleLeave = () => {
-    setLnbHover(false);
-  };
-
-  return (
-    <nav
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      style={{
-        paddingTop: "24px",
-        marginTop: "24px",
-        borderTop: "1px solid rgba(255,255,255,.3)",
-      }}
-    >
-      <ul>
-        {submenulist.map((d, idx) => (
-          <li key={idx}>
-            <Link to={d.link} target={d.target}>
-              <img
-                src={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/${d.icon}`}
-                alt={d.name}
-              />
-              <div className="menu_name">{d.name}</div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
 const NaviMenu = (props) => {
-  const { setLnbHover } = props;
-  const [active, setActive] = useState(0);
-  const handleClick = (idx) => {
-    setActive(idx);
-  };
+  const location = useLocation();
+  const { setLnbHover, lnbData } = props;
+
   const handleEnter = () => {
     setLnbHover(true);
   };
@@ -78,12 +57,11 @@ const NaviMenu = (props) => {
   return (
     <nav onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       <ul>
-        {menulist.map((d, idx) => (
+        {lnbData.map((d, idx) => (
           <li key={idx}>
             <Link
               to={d.link}
-              onClick={() => handleClick(idx)}
-              className={active === idx ? "active" : ""}
+              className={location.pathname === d.link ? "active" : ""}
             >
               <img
                 src={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/${d.icon}`}
@@ -102,7 +80,6 @@ export default function GlobalLnb({ lnbFold, setLnbFold, setLnbHover }) {
   const handleClick = () => {
     setLnbFold((prev) => !prev);
   };
-
   return (
     <>
       <div className="global_lnb">
@@ -118,8 +95,17 @@ export default function GlobalLnb({ lnbFold, setLnbFold, setLnbHover }) {
         <div className="main_logo">
           <Link to={"/"}></Link>
         </div>
-        <NaviMenu className="nav_menu" setLnbHover={setLnbHover} />
-        <NavSubMenu className="nav_menu" setLnbHover={setLnbHover} />
+        <NaviMenu
+          className="nav_menu"
+          setLnbHover={setLnbHover}
+          lnbData={menulist}
+        />
+        <Line />
+        <NaviMenu
+          className="nav_menu"
+          setLnbHover={setLnbHover}
+          lnbData={menulist2}
+        />
       </div>
     </>
   );
@@ -135,4 +121,10 @@ const LnbControllBtn = styled.button`
   margin-bottom:16px;
   &:hover {
     background-color: #404249;
+`;
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: ${(props) => (props.padding ? props.padding : "0")};
 `;
