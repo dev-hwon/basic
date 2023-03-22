@@ -54,7 +54,7 @@ export const CommonSummary = styled.div`
   letter-spacing: ${letterSpacing.quarter};
 `;
 export const GridWrap = styled.div`
-  width: 100%;
+  width: ${(props) => !props.colGap && "100%"};
   display: flex;
   flex-wrap: wrap;
   ${(props) =>
