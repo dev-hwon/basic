@@ -63,16 +63,28 @@
   ],
   "authors": [
     {
-      "id": "96092973-53fb-4e81-86d6-f902e811567b",
-      "name": "a1"
+      "id": "9bed5ff7-133e-46e0-8819-985eaedd27a0",
+      "name": "예실장"
     },
     {
-      "id": "267539f3-fb96-4548-bc33-15ce533e575f",
-      "name": "a2"
+      "id": "f96e10e6-3091-498f-944c-a3e0c93696ec",
+      "name": "승우아빠"
     },
     {
-      "id": "df781da3-d590-4ebc-b29e-2c2d45506741",
-      "name": "a3"
+      "id": "c3b46aaa-6ce7-466b-991d-8dad3d22370e",
+      "name": "아마테우스모짜"
+    },
+    {
+      "id": "806e8977-00e8-45a6-a492-c6aaf39126ae",
+      "name": "혀우너"
+    },
+    {
+      "id": "90620f97-3192-423d-ab60-72090b6db90d",
+      "name": "고츠까르"
+    },
+    {
+      "id": "fbee060c-a737-4af9-9252-d198044b8eac",
+      "name": "근육법사"
     }
   ],
   "categorys": [
@@ -108,7 +120,7 @@
   "boardlists": [
     {
       "id": "1",
-      "type" : "manual",
+      "type": "manual",
       "subject": "게시글 제목1",
       "content": "게시판1 내용입니다~",
       "author": "홍길동",
@@ -117,7 +129,7 @@
     },
     {
       "id": "2",
-      "type" : "manual",
+      "type": "manual",
       "subject": "게시글 제목2",
       "content": "게시판2 내용입니다~",
       "author": "개나리",
@@ -126,7 +138,7 @@
     },
     {
       "id": "3",
-      "type" : "free",
+      "type": "free",
       "subject": "게시글 제목2",
       "content": "게시판2 내용입니다~",
       "author": "개나리",

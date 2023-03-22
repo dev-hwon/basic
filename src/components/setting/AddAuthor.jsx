@@ -39,9 +39,18 @@ export default function AddAuthor({ onAdd, authors }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form_add_author">
-      <input type="text" onChange={handleChange} value={name} name="author" />
-      <button type="submit">추가</button>
-    </form>
+    <>
+      <div className="form_add_author_label">새로운 이름</div>
+      <form onSubmit={handleSubmit} className="form_add_author">
+        <input
+          type="text"
+          onChange={handleChange}
+          value={name}
+          name="author"
+          placeholder="이름을 입력해 주세요"
+        />
+        <button type="submit">추가</button>
+      </form>
+    </>
   );
 }

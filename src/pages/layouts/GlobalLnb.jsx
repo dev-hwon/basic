@@ -2,6 +2,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useState } from "react";
+import logo from "../../logo_medi.svg";
+import { Line } from "../../components/Style";
 const url = `${process.env.REACT_APP_HOST}`;
 const menulist = [
   {
@@ -93,7 +95,9 @@ export default function GlobalLnb({ lnbFold, setLnbFold, setLnbHover }) {
           />
         </LnbControllBtn>
         <div className="main_logo">
-          <Link to={"/"}></Link>
+          <Link to={"/"}>
+            <img src={logo} />
+          </Link>
         </div>
         <NaviMenu
           className="nav_menu"
@@ -121,10 +125,4 @@ const LnbControllBtn = styled.button`
   margin-bottom:16px;
   &:hover {
     background-color: #404249;
-`;
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.25);
-  padding: ${(props) => (props.padding ? props.padding : "0")};
 `;

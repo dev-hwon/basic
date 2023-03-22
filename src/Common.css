@@ -107,13 +107,13 @@ legend,caption {
     line-height:0
 }
 input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {color:#aaa;}
+textarea::-webkit-input-placeholder {color:#ccc;}
 input:-moz-placeholder,
-textarea:-moz-placeholder {color:#aaa;}
+textarea:-moz-placeholder {color:#ccc;}
 input::-moz-placeholder,
-textarea::-moz-placeholder {color:#aaa;}
+textarea::-moz-placeholder {color:#ccc;}
 input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {color:#aaa;}
+textarea:-ms-input-placeholder {color:#ccc;}
 input:focus::-webkit-input-placeholder,
 textarea:focus::-webkit-input-placeholder {color:transparent;}
 input:focus:-moz-placeholder,
@@ -536,8 +536,8 @@ select { width: 100%; height: 32px; font-size: var(--font-sm); color: #333; padd
 /* ----------------------------------------------------------------
     @공통_lnb
 -----------------------------------------------------------------*/
-.global_lnb .main_logo {height: 60px; background-color: #404249; transition: height .2s, width .4s; }
-.global_lnb .main_logo > a { display: block; }
+.global_lnb .main_logo { transition: height .2s, width .4s; }
+.global_lnb .main_logo > a { display: block; text-align: center; }
 
 .global_lnb nav { padding:24px 0;}
 .global_lnb nav ul {}

@@ -11,7 +11,14 @@ const letterSpacing = {
   quarter: "-0.25px",
   half: "-0.5px",
 };
-
+export const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${(props) =>
+    props.lineColor ? props.lineColor : "rgba(255, 255, 255, 0.25)"};
+  padding: ${(props) => (props.padding ? props.padding : "0")};
+  margin: ${(props) => (props.margin ? props.margin : "0")};
+`;
 export const CommontitleH1 = styled.h1`
   font-size: 20px;
   font-weight: bold;
@@ -32,6 +39,12 @@ export const CommontitleH4 = styled.h4`
   font-size: 18px;
   font-weight: bold;
   color: #000;
+  letter-spacing: ${letterSpacing.half};
+`;
+export const CommontitleH5 = styled.h5`
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
   letter-spacing: ${letterSpacing.half};
 `;
 export const CommonSummary = styled.div`
@@ -81,6 +94,7 @@ export const GridWrap = styled.div`
 
 export const GridCol = styled.div`
   flex: 0 0 auto;
+  width: ${(props) => (props.customWidth ? props.customWidth : "auto")};
 `;
 export const Box = styled.div`
   background-color: #fff;

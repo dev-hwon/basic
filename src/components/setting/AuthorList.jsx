@@ -18,8 +18,12 @@ export default function AuthorList({ author, onDelete }) {
   };
   return (
     <div className="author">
-      {name}
-      <button type="button" onClick={handleDelete}></button>
+      <div className="author_name">{name}</div>
+      <button type="button" onClick={handleDelete}>
+        <img
+          src={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/setting/icon_delete_author.svg`}
+        />
+      </button>
     </div>
   );
 }
