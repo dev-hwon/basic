@@ -89,10 +89,10 @@ export default function Alarm() {
         </GridCol>
         <GridCol customWidth="calc(100% - 200px)">
           <InputWrap>
-            <Inputtitle>모든 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>모든 알람 받기</InputTitle>
+            <InputSummary>
               클리닉 업무관리 우측 알림 영역에서 볼 수 있어요
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxAll
               alarmA={alarmPcA}
               alarmB={alarmPcB}
@@ -101,17 +101,17 @@ export default function Alarm() {
           </InputWrap>
           <Line lineColor="#DFE3E9" />
           <InputWrap>
-            <Inputtitle>MV재료 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>MV재료 알람 받기</InputTitle>
+            <InputSummary>
               메디밸류 재료 스토어의 배송 현황 알림을 받아요.
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxOne alarm={alarmPcA} setAlarm={handleClickAlarmPcA} />
           </InputWrap>
           <InputWrap>
-            <Inputtitle>MV기공 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>MV기공 알람 받기</InputTitle>
+            <InputSummary>
               메디밸류 기공 플랫폼의 배송 현황 알림을 받아요.
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxOne alarm={alarmPcB} setAlarm={handleClickAlarmPcB} />
           </InputWrap>
         </GridCol>
@@ -122,10 +122,10 @@ export default function Alarm() {
         </GridCol>
         <GridCol customWidth="calc(100% - 200px)">
           <InputWrap>
-            <Inputtitle>모든 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>모든 알람 받기</InputTitle>
+            <InputSummary>
               클리닉 업무관리 우측 알림 영역에서 볼 수 있어요
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxAll
               alarmA={alarmChromeA}
               alarmB={alarmChromeB}
@@ -134,20 +134,20 @@ export default function Alarm() {
           </InputWrap>
           <Line lineColor="#DFE3E9" />
           <InputWrap>
-            <Inputtitle>MV재료 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>MV재료 알람 받기</InputTitle>
+            <InputSummary>
               메디밸류 재료 스토어의 배송 현황 알림을 받아요
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxOne
               alarm={alarmChromeA}
               setAlarm={handleClickAlarmChromeA}
             />
           </InputWrap>
           <InputWrap>
-            <Inputtitle>MV기공 알람 받기</Inputtitle>
-            <Inputsummary>
+            <InputTitle>MV기공 알람 받기</InputTitle>
+            <InputSummary>
               메디밸류 기공 플랫폼의 배송 현황 알림을 받아요.
-            </Inputsummary>
+            </InputSummary>
             <InputCheckboxOne
               alarm={alarmChromeB}
               setAlarm={handleClickAlarmChromeB}
@@ -162,12 +162,12 @@ const InputWrap = styled.div`
   position: relative;
   padding: 16px;
 `;
-const Inputtitle = styled.div`
+const InputTitle = styled.div`
   font-size: 14px;
   font-weight: 500;
   color: #222;
 `;
-const Inputsummary = styled.div`
+const InputSummary = styled.div`
   font-size: 12px;
   color: #aaa;
   margin-top: 4px;

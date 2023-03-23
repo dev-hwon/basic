@@ -65,10 +65,7 @@ const NaviMenu = (props) => {
               to={d.link}
               className={location.pathname === d.link ? "active" : ""}
             >
-              <img
-                src={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/${d.icon}`}
-                alt={d.name}
-              />
+              <img src={`/basic/images/${d.icon}`} alt={d.name} />
               <div className="menu_name">{d.name}</div>
             </Link>
           </li>
@@ -89,10 +86,7 @@ export default function GlobalLnb({ lnbFold, setLnbFold, setLnbHover }) {
           className={"btn_lnb_controll" + (lnbFold ? " fold" : "")}
           onClick={handleClick}
         >
-          <img
-            src={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/icon_menu.svg`}
-            alt=""
-          />
+          <img src={`/basic/images/icon_menu.svg`} alt="" />
         </LnbControllBtn>
         <div className="main_logo">
           <Link to={"/"}>

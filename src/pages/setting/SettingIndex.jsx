@@ -7,13 +7,17 @@ import Author from "./Author";
 import Guide from "./Guide";
 
 const tabinfo = [
-  { tabname: "글쓴이", tabcontent: <Author /> },
-  { tabname: "알람", tabcontent: <Alarm /> },
-  { tabname: "서비스 가이드", tabcontent: <Guide /> },
+  { tabclass: "tab_author", tabname: "글쓴이", tabcontent: <Author /> },
+  { tabclass: "tab_alarm", tabname: "알람", tabcontent: <Alarm /> },
+  { tabclass: "tab_guide", tabname: "서비스 가이드", tabcontent: <Guide /> },
 ];
 
 function Tabcontent({ tabStatus }) {
-  return <div className="tabContent">{tabinfo[tabStatus].tabcontent}</div>;
+  return (
+    <div className={"tabContent " + tabinfo[tabStatus].tabclass}>
+      {tabinfo[tabStatus].tabcontent}
+    </div>
+  );
 }
 function TabMenu({ tabStatus, setTabStatus }) {
   const handleClick = (status) => {

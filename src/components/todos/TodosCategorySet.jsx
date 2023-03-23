@@ -7,6 +7,8 @@ import {
   ButtonWrapper,
   ConfirmButton,
   CancelButton,
+  GridCol,
+  GridWrap,
 } from "../Style";
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 const colorList = [
@@ -88,50 +90,73 @@ export default function TodosCategorySet({ modalProps }) {
       <ModalSummary>각 영역의 카테고리를 지정해 보세요.</ModalSummary>
       <form onSubmit={handleSubmit}>
         <CategoryList className="categoryList">
-          {categorys.map((category, idx) => (
-            <label key={idx}>
-              <input
-                type="radio"
-                name="categoryName"
-                value={category.id}
-                onChange={handleChangeSelectedCategory}
-              />
-              <span className="category_name">{category.name}</span>
-            </label>
-          ))}
-        </CategoryList>
-
-        <input
-          type="text"
-          placeholder={
-            !!selectedCategory
-              ? selectedCategory.name + "(최대6자)"
-              : "변경할 카테고리를 선택해 주세요"
-          }
-          value={changeInfo.name}
-          onChange={handleChangeCategoryName}
-        />
-        <CategoryColor>
           <ul>
-            {colorList.map((hexCode, idx) => (
+            {categorys.map((category, idx) => (
               <li key={idx}>
-                <label>
+                <InputWrapList hexcode={category.color}>
                   <input
                     type="radio"
-                    name="categoryColor"
-                    value={hexCode}
-                    onChange={handleChangeCategoryColor}
-                    checked={
-                      !!changeInfo.color && changeInfo.color === hexCode
-                        ? true
-                        : false
-                    }
+                    name="categoryName"
+                    value={category.id}
+                    onChange={handleChangeSelectedCategory}
                   />
-                  <span>{hexCode}</span>
-                </label>
+                  <span className="input_box_shape">{category.name}</span>
+                </InputWrapList>
               </li>
             ))}
           </ul>
+        </CategoryList>
+        <CategoryName>
+          <GridWrap colVerticalAlign="center">
+            <GridCol customWidth="116px">
+              <div className="option_name">카테고리명</div>
+            </GridCol>
+            <GridCol customWidth="calc(100% - 116px)">
+              <input
+                type="text"
+                name="categoryname"
+                placeholder={
+                  !!selectedCategory
+                    ? selectedCategory.name + "(최대6자)"
+                    : "변경할 카테고리를 선택해 주세요"
+                }
+                value={changeInfo.name}
+                onChange={handleChangeCategoryName}
+              />
+            </GridCol>
+          </GridWrap>
+        </CategoryName>
+        <CategoryColor>
+          <GridWrap colVerticalAlign="center">
+            <GridCol customWidth="116px">
+              <div className="option_name">카테고리 색상</div>
+            </GridCol>
+            <GridCol customWidth="calc(100% - 116px)">
+              <ul>
+                {colorList.map((hexCode, idx) => (
+                  <li key={idx}>
+                    <InputWrapColor
+                      className="input_checkbox"
+                      hexcode={hexCode}
+                    >
+                      <input
+                        type="radio"
+                        name="categoryColor"
+                        value={hexCode}
+                        onChange={handleChangeCategoryColor}
+                        checked={
+                          !!changeInfo.color && changeInfo.color === hexCode
+                            ? true
+                            : false
+                        }
+                      />
+                      <span className="input_palette_shape"></span>
+                    </InputWrapColor>
+                  </li>
+                ))}
+              </ul>
+            </GridCol>
+          </GridWrap>
         </CategoryColor>
 
         <ButtonWrapper align="right">
@@ -150,42 +175,105 @@ export default function TodosCategorySet({ modalProps }) {
   );
 }
 const CategoryList = styled.div`
-  display:flex;
-  flex-warp:warp
-  justify-content: space-between;
-  align-items: center;
-  margin:0 -5px;
-  > label {
-    flex:0 0 auto;
-    width:25%;
-    padding:0 5px;
-    > input {
-      appearance: none;
-      display:none;
-    }
-    > span.category_name {
-      display:block;
-      width:100%;
-      height:100%;
-      font-size: 14px;
-      color:#222;
-      border:1px solid #eee;
-      
+  margin-top: 16px;
+  > ul {
+    display:flex;
+    flex-warp:warp
+    justify-content: space-between;
+    align-items: center;
+    margin:0 -5px;
+    > li {
+      flex:0 0 auto;
+      width:25%;
+      padding:0 5px;
     }
   }
 `;
+const InputWrapList = styled.label`
+  position: relative;
+  display: block;
+  width: 100%;
 
+  overflow: hidden;
+  > input {
+    appearance: none;
+    display: none;
+  }
+  .input_box_shape {
+    position: relative;
+    display: block;
+    padding: 32px 0;
+    width: 100%;
+    font-size: 14px;
+    color: #222;
+    text-align: center;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 1px solid #dfe3ea;
+    border-radius: 4px;
+
+    &:after {
+      content: "";
+      width: 100%;
+      height: 8px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: ${(props) => (props.hexcode ? props.hexcode : "#fff")};
+    }
+  }
+
+  > input:checked + .input_box_shape {
+    border: 1px solid #aaafb9;
+  }
+`;
+
+const CategoryName = styled.div`
+  margin-top: 16px;
+  .option_name {
+    font-size: 14px;
+    color: #222;
+    text-align: left;
+  }
+`;
 const CategoryColor = styled.div`
-  margin-top:10px;
-  
-  > ul {
+  margin-top: 16px;
+  .option_name {
+    font-size:14px;
+    color:#222;
+    text-align:left;
+  }
+  ul {
     display:flex;
     flex-warp:warp
     justify-contents : flex-start;
     align-items: center;
 
     > li {
-
+      flex: 0 0 auto;
+      width:24px;
     }
+    > li + li {
+      margin-left:10px;
+    }
+  }
+`;
+
+const InputWrapColor = styled.label`
+  > input {
+    appearance: none;
+    display: none;
+  }
+  .input_palette_shape {
+    display: block;
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 100%;
+    background-color: ${(props) => (props.hexcode ? props.hexcode : "#fff")};
+  }
+  > input:checked + .input_palette_shape {
+    opacity: 0.5;
   }
 `;
