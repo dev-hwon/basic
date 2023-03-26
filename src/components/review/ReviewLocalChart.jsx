@@ -1,16 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const AchievementDescript = (props) => {
-  const { percent } = props;
-  return (
-    <AchievementDescriptTxt>
-      전체 업무 중<br />
-      <em>{percent}%</em> 완료되었어요
-    </AchievementDescriptTxt>
-  );
-};
-const AchievementChart = (props) => {
+const LocalChart = (props) => {
   const { percent, trackLength } = props;
   let perValue = percent * trackLength * 0.01;
   let emptyPerValue = 1 - perValue;
@@ -27,8 +18,10 @@ const AchievementChart = (props) => {
     >
       <svg viewBox="0 0 200 100">
         <defs>
-          <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#25AAE1" />
+          <linearGradient id="linear2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F05555" />
+            <stop offset="25%" stopColor="#FFBE16" />
+            <stop offset="50%" stopColor="#B6E82A" />
             <stop offset="100%" stopColor="#25AAE1" />
           </linearGradient>
         </defs>
@@ -37,7 +30,8 @@ const AchievementChart = (props) => {
           cy="100"
           r="90"
           fill="none"
-          stroke="#F5F8FE"
+          stroke="url(#linear2)"
+          // stroke="#F5F8FE"
           strokeWidth="15"
           // strokeLinecap="round"
           strokeDasharray={`${2 * Math.PI * 90 * 0.6} ${
@@ -50,7 +44,7 @@ const AchievementChart = (props) => {
           cy="100"
           r="90"
           fill="none"
-          stroke="url(#linear)"
+          stroke="url(#linear2)"
           strokeWidth="15"
           // strokeLinecap="round"
           strokeDasharray={`${2 * Math.PI * 90 * perValue} ${
@@ -67,11 +61,10 @@ const AchievementChart = (props) => {
   );
 };
 
-export default function TodosAchievementChart({ percent, trackLength }) {
+export default function ReviewLocalChart({ percent, trackLength }) {
   return (
     <>
-      <AchievementChart percent={percent} trackLength={trackLength} />
-      <AchievementDescript percent={percent} />
+      <LocalChart percent={percent} trackLength={trackLength} />
     </>
   );
 }
@@ -82,18 +75,6 @@ const AnimatedCircle = styled.circle`
     0% {
       stroke-dasharray: 0 ${2 * Math.PI * 90};
     }
-  }
-`;
-const AchievementDescriptTxt = styled.div`
-  font-size: 15px;
-  color: #000;
-  text-align: center;
-  margin-top: 36px;
-  letter-spacing: -0.5px;
-  > em {
-    font-size: 16px;
-    font-weight: 500;
-    color: #5570f1;
   }
 `;
 const InnerText = styled.div`

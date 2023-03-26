@@ -25,6 +25,9 @@ import Modal, { ModalOpenBtn } from "../../components/modal/Modal";
 import TodosIndex from "../todos/TodosIndex";
 import Addtodo from "../../components/todos/Addtodo";
 import TodosCategorySet from "../../components/todos/TodosCategorySet";
+import TodosAchieve from "../../components/main/TodosAchieve";
+import ToolTip from "../../components/tooltip/ToolTip";
+import ReviewLocalChart from "../../components/review/ReviewLocalChart";
 
 // const filters = ["all", "active", "completed"];
 export default function Main() {
@@ -40,9 +43,25 @@ export default function Main() {
       <CommontitleH3>클리닉 리포트</CommontitleH3>
       <GridWrap colGap={16} colWidth={274} colWidthUnit="px">
         <GridCol>
-          <Box>
-            <BoxHead>오늘의 업무 완료</BoxHead>
-            <TodosAchievementChart
+          <Box padding="16px 20px">
+            <TodosAchieve />
+          </Box>
+        </GridCol>
+        <GridCol>
+          <Box padding="16px 20px">
+            <BoxHead>
+              지역 리뷰 보기&nbsp;
+              <ToolTip
+                position="top"
+                contentWidth="246px"
+                buttonSize="18px"
+                buttonIcon={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/common/icon_tooltip.svg`}
+                buttonIconAlpha={0.6}
+                buttonIconVerticalPosition="-2px"
+                content="주요 클리닉 리뷰 사이트에 작성된 리뷰를 AI가 분석 후 보여드려요"
+              />
+            </BoxHead>
+            <ReviewLocalChart
               percent={75}
               trackLength={0.6}
               chartDirection={0.625}
@@ -50,14 +69,20 @@ export default function Main() {
           </Box>
         </GridCol>
         <GridCol>
-          <Box>
-            <BoxHead>리뷰 한번에 보기</BoxHead>
+          <Box padding="16px 20px">
+            <BoxHead>
+              클리닉 리뷰 한분에 보기
+              <ToolTip
+                position="top"
+                contentWidth="246px"
+                buttonSize="18px"
+                buttonIcon={`${process.env.REACT_APP_DEFAULT_IMG_URL}/images/common/icon_tooltip.svg`}
+                buttonIconAlpha={0.6}
+                buttonIconVerticalPosition="-2px"
+                content="주요 클리닉 리뷰 사이트에 작성된 리뷰를 AI가 분석 후 보여드려요"
+              />
+            </BoxHead>
             <Reviews></Reviews>
-          </Box>
-        </GridCol>
-        <GridCol>
-          <Box>
-            <BoxHead>지역 리뷰 비교</BoxHead>
           </Box>
         </GridCol>
         <GridCol>
