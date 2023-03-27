@@ -10,6 +10,11 @@ import {
   GridCol,
   GridWrap,
 } from "../Style";
+// react-css-transition-replace , react version 18에서 지원안됨
+// react-time-picker-input , react version 18에서 지원안됨
+// import TimePicker from "react-time-picker";
+import TimePicker from "react-time-picker/dist/entry.nostyle";
+
 const categoryUrl = `${process.env.REACT_APP_TEST_JSONSERVER_CATEGORYS}`;
 const colorList = [
   "#F65555",
@@ -29,6 +34,9 @@ export default function TodosCategorySet({ modalProps }) {
     name: "",
     color: "",
   });
+  const [startTime, setStartTime] = useState("00:00");
+  const [endTime, setEndTime] = useState("00:00");
+
   const { loading, errorMessage, categorys } = dataList;
 
   const handleChangeCategoryName = (e) => {
@@ -42,14 +50,14 @@ export default function TodosCategorySet({ modalProps }) {
       categorys.filter((category) => category.id === e.target.value)[0]
     );
     setChangeInfo({
-      ...changeInfo,
+      name: categorys.filter((category) => category.id === e.target.value)[0]
+        .name,
       color: categorys.filter((category) => category.id === e.target.value)[0]
         .color,
     });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedCategory);
     if (selectedCategory === "") {
       alert("변경할 카테고리를 선택해 주세요");
       return;
@@ -98,6 +106,7 @@ export default function TodosCategorySet({ modalProps }) {
                     type="radio"
                     name="categoryName"
                     value={category.id}
+                    className="input_radio"
                     onChange={handleChangeSelectedCategory}
                   />
                   <span className="input_box_shape">{category.name}</span>
@@ -121,6 +130,7 @@ export default function TodosCategorySet({ modalProps }) {
                     : "변경할 카테고리를 선택해 주세요"
                 }
                 value={changeInfo.name}
+                className="input_text full-width"
                 onChange={handleChangeCategoryName}
               />
             </GridCol>
@@ -158,6 +168,51 @@ export default function TodosCategorySet({ modalProps }) {
             </GridCol>
           </GridWrap>
         </CategoryColor>
+
+        <CategoryTimeStart>
+          <GridWrap colVerticalAlign="center">
+            <GridCol customWidth="116px">
+              <div className="option_name">시작시간</div>
+            </GridCol>
+            <GridCol customWidth="calc(100% - 116px)">
+              <TimePicker
+                className="startTime_timepicker custom_timepicker"
+                onChange={(time) => setStartTime(time)}
+                value={startTime}
+                disableClock={true}
+                autoFocus={true}
+                required={true}
+                name="startTime"
+                hourAriaLabel="startTime_Hour"
+                minuteAriaLabel="startTime_Minute"
+                // maxTime="09:15" 설정최대치 (업무 마감시간 이후 설정안되게)
+                // minTime="" 설정최소치 (업무 시작시간 이전 설정안되게)
+              />
+            </GridCol>
+          </GridWrap>
+        </CategoryTimeStart>
+        <CategoryTimeEnd>
+          <GridWrap colVerticalAlign="center">
+            <GridCol customWidth="116px">
+              <div className="option_name">종료시간</div>
+            </GridCol>
+            <GridCol customWidth="calc(100% - 116px)">
+              <TimePicker
+                className="endTime_timepicker custom_timepicker"
+                onChange={(time) => setEndTime(time)}
+                value={endTime}
+                disableClock={true}
+                autoFocus={true}
+                required={true}
+                name="startTime"
+                hourAriaLabel="endTime_Hour"
+                minuteAriaLabel="endTime_Minute"
+                // maxTime="09:15" 설정최대치 (업무 마감시간 이후 설정안되게)
+                // minTime="" 설정최소치 (업무 시작시간 이전 설정안되게)
+              />
+            </GridCol>
+          </GridWrap>
+        </CategoryTimeEnd>
 
         <ButtonWrapper align="right">
           <CancelButton className="common_btn btn_sm btn_cancel">
@@ -240,6 +295,7 @@ const CategoryName = styled.div`
 `;
 const CategoryColor = styled.div`
   margin-top: 16px;
+  padding: 4px 0;
   .option_name {
     font-size:14px;
     color:#222;
@@ -277,3 +333,6 @@ const InputWrapColor = styled.label`
     opacity: 0.5;
   }
 `;
+
+const CategoryTimeStart = styled(CategoryName)``;
+const CategoryTimeEnd = styled(CategoryName)``;

@@ -37,7 +37,7 @@ export default function TodosAchieve() {
     <div>
       <Swiper
         modules={[Navigation]}
-        Navigation
+        navigation={true}
         spaceBetween={0}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}

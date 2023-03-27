@@ -262,7 +262,10 @@ export const CancelButton = styled.button`
 `;
 export const ConfirmButton = styled.button`
   width: 96px;
-  border-radius: 32px;
+  border-radius: 4px;
+  &:disable {
+    background-color: #dfe3ea;
+  }
 `;
 // default table
 export const Table = styled.table`
